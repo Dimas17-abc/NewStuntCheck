@@ -7,17 +7,12 @@ use Auth;
 
 class CustomRegisterController extends Controller
 {
-    public function credentials(Request $request)
+    protected function create(array $data)
     {
-    $tekan = $request->validate([
-        'email' => 'required',
-        'password' => 'required',
-        'password_confirmation' => 'required',
-    ]);
-    if (Auth::attempt($tekan)) {
-        return redirect()->route('profiles.sign_in');
-    } else {
-        return redirect()->back();
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
-}
 }

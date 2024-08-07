@@ -14,7 +14,9 @@
             <form action="{{ route('profiles.sign_up') }}" method="GET">
                 <button type="submit" class="toggle-link">Daftar</button>
             </form>
+            <form action="{{route('profile.sign_in')}}" method="">
             <button class="active">Masuk</button>
+        </form>
         </div>
         <form action="/login/credentials" method="POST">
             @csrf

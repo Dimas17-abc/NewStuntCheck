@@ -31,7 +31,7 @@ Route::get('/profile/sign_in', function () {
 Auth::routes();
 //user
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/daftar', [HomeController::class, 'index'])->name('daftar');
+Route::get('/regis', [HomeController::class, 'index'])->name('daftar');
 // // Route::middleware(['auth', 'user-access:user'])->group(function () {
 
 //     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -49,4 +49,4 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/login/credentials', [App\Http\Controllers\CustomLoginController::class, 'credentials'])->name('credentials');
-Route::post('/daftar/credentials', [App\Http\Controllers\CustomRegisterController::class, 'credentials'])->name('credentials');
+// Route::post('/daftar/credentials', [App\Http\Controllers\CustomRegisterController::class, 'credentials'])->name('credentials');

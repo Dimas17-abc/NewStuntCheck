@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Poppins', sans-serif;
     background-color: #f0f8f5;
     color: #333;
@@ -131,4 +131,123 @@ h2 {
     .card {
         width: 100%;
     }
+} */
+
+/* Basic Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+.container {
+    padding: 20px;
+}
+h1, h2, h3 {
+    margin-bottom: 10px;
+    color: #34495e;
+}
+.content-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    border-top: 4px solid #27ae60; /* Garis batas hijau di atas konten */
+    transition: box-shadow 0.3s;
+}
+.content-box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.card {
+    flex: 1;
+    min-width: 120px;
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #27ae60; /* Warna dasar hijau */
+    display: flex;
+    justify-content: space-around; /* Elemen lebih dekat */
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+.nav-link {
+    text-decoration: none;
+    color: white; /* Warna teks hijau */
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+}
+.nav-link.active {
+    color: #1abc9c; /* Warna hijau muda untuk elemen aktif */
+}
+.nav-icon {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 3px;
+    color: white; /* Warna ikon hijau */
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #34495e;
+}
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60; /* Warna tombol hijau */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: #2ecc71; /* Warna hijau lebih terang saat hover */
+}
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #27ae60; /* Garis batas hijau di atas konten */
 }
