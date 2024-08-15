@@ -1,0 +1,111 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e6f4f1;
+}
+
+.container {
+    background-color: #a6e4b7;
+    padding: 20px;
+    width: 320px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #4e4e4e;
+}
+
+.container .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.container label {
+    display: block;
+    font-size: 14px;
+    color: #4e4e4e;
+}
+
+.container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.container .btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #74c492;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.container .btn:hover {
+    background-color: #66b286;
+}
+
+.container a {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #4e4e4e;
+    text-decoration: none;
+}
+
+.container a:hover {
+    text-decoration: underline;
+}
+
+.container .sign-up-sign-in {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4e4e4e;
+}
+
+.container .sign-up-sign-in a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #4e4e4e;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.container .sign-up-sign-in a.active {
+    font-weight: bold;
+    color: #66b286;
+    border-bottom: 2px solid #66b286;
+}
+
+.container .social-login {
+    margin-top: 20px;
+}
+
+.container .social-login img {
+    width: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.container .social-login img:hover {
+    opacity: 0.7;
+}
