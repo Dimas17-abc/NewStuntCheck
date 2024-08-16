@@ -20,15 +20,6 @@ class CustomLoginController extends Controller
             return redirect()->back();
         }
 
-        // $email = $request->email;
-        // $password = $request->password;
-
-        // if ($email == 'admin@admin.com' && $password == 'admin123') {
-        //     return redirect('/menus/home');
-        // } else {
-        //     return redirect()->back();
-        // }
-
     }
 
 }

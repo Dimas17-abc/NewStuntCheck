@@ -49,4 +49,12 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/login/credentials', [App\Http\Controllers\CustomLoginController::class, 'credentials'])->name('credentials');
-Route::post('/daftar/credentials', [App\Http\Controllers\CustomRegisterController::class, 'credentials'])->name('credentials');
+Route::post('/register/credentials', [App\Http\Controllers\CustomUserRegisterController::class, 'credentials'])->name('credentials');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+  
+Route::get('/home', [HomeController::class, 'index'])->name('home');

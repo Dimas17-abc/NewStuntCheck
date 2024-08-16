@@ -44,7 +44,7 @@
             <a href="{{ route('password.request') }}" class="password">Lupa Password?</a>
         </div>
         <div class="sign-up-prompt">
-            <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Sign Up</a></p>
+            <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Daftar</a></p>
         </div>
     </div>
 </body>
