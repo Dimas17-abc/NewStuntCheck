@@ -26,12 +26,12 @@
 
         <div class="input-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" value="Echa Hessa Maulidia" readonly>
+            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
         </div>
 
         <div class="input-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" value="echessa@gmail.com" readonly>
+            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
         </div>
 
         <div class="input-group">

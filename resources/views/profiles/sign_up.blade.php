@@ -16,7 +16,7 @@
                 <button type="submit" class="toggle-link">Masuk</button>
             </form>
         </div>
-        <form action="/daftar/credetnials" method="POST">
+        <form action="{{route('register')}}" method="POST">
             @csrf
             <div class="input-group">
                 <span class="icon">

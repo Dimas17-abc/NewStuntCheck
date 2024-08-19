@@ -26,12 +26,12 @@
 
         <div class="input-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" value="Echa Hessa Maulidia" readonly>
+            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
         </div>
 
         <div class="input-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" value="echessa@gmail.com" readonly>
+            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
         </div>
 
         <div class="input-group">
@@ -46,9 +46,9 @@
         </form>
 
         <div class="bottom-nav">
-            <a href="#" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
-            <a href="#" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
-            <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+            <a href="{{route('menus.kalkulator')}}" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
+            <a href="{{route('menus.home')}}" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+            <a href="{{route('profiles.setting')}}" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
         </div>
     </div>
 </body>
