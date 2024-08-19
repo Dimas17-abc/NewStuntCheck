@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Pertumbuhan</title>
-    <link rel="stylesheet" href="{{ asset('css/kalku.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/kalkul.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>Kalkulator Pertumbuhan</h1>
@@ -39,10 +41,10 @@
         <div class="result">
             <h3>Hasil Perhitungan</h3>
             <p>Nama: </p>
-            <p>Umur:    bulan</p>
-            <p>Tinggi:  cm</p>
-            <p>Berat:   kg</p>
-            <p>Kategori:    </p>
+            <p>Umur: bulan</p>
+            <p>Tinggi: cm</p>
+            <p>Berat: kg</p>
+            <p>Kategori: </p>
             <button class="btn">Simpan Hasil Ukur</button>
         </div>
     </div>
@@ -53,4 +55,5 @@
         <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
     </div>
 </body>
+
 </html>

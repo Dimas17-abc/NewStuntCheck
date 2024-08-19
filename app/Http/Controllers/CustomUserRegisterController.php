@@ -1,34 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;    
 use Auth;
-use Illuminate\Support\Facades\Validator;
 
 class CustomUserRegisterController extends Controller
 {
-    public function credentials(Request $request)
+    public function create()
     {
-        // Validasi input
+        return view('profiles.sign_up');
+    }
+
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Buat user baru
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'password_confirmation' =>Hash::make($request->password_confirmation),
         ]);
 
-        // Redirect ke halaman login dengan pesan sukses
-        return redirect()->route('login')->with('success', 'Pendaftaran berhasil, silakan login.');
+        auth()->login($user);
+
+        return redirect()->route('home');
     }
 }
