@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type'
+        'type',
+        'profile_photo',
     ];
 
     /**
@@ -58,4 +59,6 @@ class User extends Authenticatable
             get: fn ($value) =>  ["user", "admin", "manager"][$value],
         );
     }
+
+    
 }

@@ -56,4 +56,16 @@ class HomeController extends Controller
     {
         return view('managerHome');
     }
+
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('profiles.setting', compact('user'));
+    }
+
 }

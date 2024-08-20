@@ -20,9 +20,14 @@
         </div>
 
         <div class="profile-pic">
-            <img src="{{ asset('image/human.png') }}" alt="Profile Picture">
-            <span class="edit-photo-icon">✏️</span>
+            <img src="{{ $user->profile_photo ? asset('storage/profile_photos/' . $user->profile_photo) : asset('image/human.png') }}" alt="Profile Picture" id="profileImage">
+            <form action="{{ route('profile.update.photo') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <label for="photo" class="edit-photo-icon">✏️</label>
+                <input type="file" id="photo" name="photo" accept="image/*" style="display: none;" onchange="this.form.submit()">
+            </form>
         </div>
+        
 
         <div class="input-group">
             <label for="name">Full Name</label>
@@ -46,9 +51,9 @@
         </form>
 
         <div class="bottom-nav">
-            <a href="#" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
-            <a href="#" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
-            <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
+        <a href="{{route('menus.kalkulator')}}" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
+        <a href="{{route('menus.home')}}" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
+        <a href="{{route('profiles.setting')}}" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
         </div>
     </div>
 </body>

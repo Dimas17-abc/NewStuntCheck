@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="container">
+        <a href="{{ route('menus.home') }}" class="back-icon">
+            <img src="{{ asset('image/back.png') }}" alt="Back" style="width: 24px;">
+        </a>
         <h1>Kalkulator Pertumbuhan</h1>
         <h2>Hola! Ayo cek pertumbuhan dan perkembangan balita kamu dengan menggunakan Kalkulator Pertumbuhan Balita</h2>
         <form action="{{ route('kalkulator.hitung') }}" method="POST">

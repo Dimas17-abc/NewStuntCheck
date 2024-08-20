@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalkulatorController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,7 +33,7 @@ Route::get('/menus/home', function () {
 
 Route::get('/menus/kalkulator', function () {
     return view('menus.kalkulator');
-})->name('menus.kalkulator');
+})->middleware('auth')->name('menus.kalkulator');
 
 Route::get('/profiles/sign_in', function () {
     return view('profiles.sign_in');
@@ -42,9 +43,16 @@ Route::get('/profiles/setting', function () {
     return view('profiles.setting');
 })->middleware('auth')->name('profiles.setting');
 
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profiles.setting');
+
+// Route untuk memperbarui foto profil
+Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.update.photo');
+
+
 Route::post('/menus/kalkulator/hitung', [KalkulatorController::class, 'calculate'])->name('kalkulator.hitung');
 
 Auth::routes();
+
 //user
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/regis', [HomeController::class, 'index'])->name('regis');
