@@ -68,8 +68,10 @@ body {
 
 /* Input Group styling */
 .input-group {
-    margin-bottom: 15px;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
 }
 
 .input-group label {
@@ -77,6 +79,7 @@ body {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 5px;
+    justify-content: flex-start;
 }
 
 .input-group input {
@@ -88,6 +91,8 @@ body {
     font-size: 1rem;
     color: #333;
     pointer-events: none;
+    position: relative;
+    justify-items: center;
 }
 
 .logout-button {

@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -18,7 +18,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the home page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -27,20 +27,20 @@ class HomeController extends Controller
         return view('home');
     }
 
-
     /**
-     * Show the application dashboard.
+     * Show the registration page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function showRegis()
     {
         return view('regis');
     }
+
     /**
-     * Show the application dashboard.
+     * Show the admin home page.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
     public function adminHome(): View
     {
@@ -48,17 +48,17 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the manager home page.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\View\View
      */
     public function managerHome(): View
     {
         return view('managerHome');
     }
 
-     /**
-     * Show the application dashboard.
+    /**
+     * Show the user profile settings page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -67,5 +67,4 @@ class HomeController extends Controller
         $user = Auth::user();
         return view('profiles.setting', compact('user'));
     }
-
 }

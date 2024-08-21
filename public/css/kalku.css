@@ -1,28 +1,38 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    background-color: #f0f8f5;
     color: #333;
     text-align: center;
-    padding: 20px;
+    padding: 7px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .container {
     max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
 }
 
-.back-icon, .edit-icon {
-    font-size: 1.2rem;
-    color: #4caf50;
-    cursor: pointer;
-    justify-content: start;
-    text-align: start;
-    
+.back-icon {
+    position: relative;
+    top: 10px;
+    left: 130px;
+    z-index: 100;
 }
+
+.back-icon img {
+    display: block;
+}
+
 
 h1 {
     color: #2e8b57;
@@ -80,4 +90,10 @@ h2 {
 
 .result p {
     margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .back-icon {
+        left: 10px; /* Posisi kiri diubah agar lebih sesuai dengan layar kecil */
+    }
 }

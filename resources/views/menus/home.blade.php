@@ -12,21 +12,28 @@
 <body>
     <div class="container">
         <div class="profile-container">
-            <div class="header">
-                <h2>Profile</h2>
-                <a href="{{route('profiles.setting')}}">
-                <span class="edit-icon">✏️</span>
-            </a>
-            </div>  
-        <h1>Hello {{ Auth::user()->name }}</h1>
-        <h2>Selamat Datang di StuntCheck!</h2>
+            <div class="profile-text">
+                <h1>Hello {{ Auth::user()->name }}</h1>
+                <h2>Selamat Datang di StuntCheck!</h2>
+            </div>
+            <div class="profile-settings">
+                <a href="{{ route('profiles.setting') }}">
+                    <img src="{{asset('images/human.png')}}" alt="" width="65px">
+                </a>
+            </div>
+        </div>
         <!-- Artikel Stunting -->
         <div class="content-box">
             <h3>Berita Terkini Tentang Stunting di Indonesia</h3>
-            <p>Stunting masih menjadi masalah utama di Indonesia. Menurut data terbaru, lebih dari 27% anak di Indonesia
+            <p id="news-content">Stunting masih menjadi masalah utama di Indonesia. Menurut data terbaru, lebih dari 27% anak di Indonesia
                 mengalami stunting, yang dapat mempengaruhi perkembangan fisik dan kognitif mereka. Pemerintah terus
                 berupaya menurunkan angka ini dengan berbagai program kesehatan dan nutrisi.</p>
             <p><strong>Sumber:</strong> Kementerian Kesehatan RI</p>
+            
+            <!-- Tombol Update Berita -->
+            @can('update-news')
+                <button id="update-news-btn">Update Berita</button>
+            @endcan
         </div>
 
         <!-- Data Tahunan Stunting -->
@@ -47,32 +54,38 @@
         <!-- Kalkulator Pertumbuhan -->
         @include('menus.kalkulator')
     </div>
-</body>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('stuntingChart').getContext('2d');
-    const stuntingChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2019', '2020', '2021', '2022', '2023'],
-            datasets: [{
-                label: 'Prevalensi Stunting (%)',
-                data: [30, 29, 28, 27.5, 27],
-                backgroundColor: 'rgba(39, 174, 96, 0.7)', /* Hijau transparan */
-                borderColor: 'rgba(39, 174, 96, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart.js configuration
+        const ctx = document.getElementById('stuntingChart').getContext('2d');
+        const stuntingChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['2019', '2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Prevalensi Stunting (%)',
+                    data: [30, 29, 28, 27.5, 27],
+                    backgroundColor: 'rgba(39, 174, 96, 0.7)', /* Hijau transparan */
+                    borderColor: 'rgba(39, 174, 96, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
 
+        // Event listener for update button
+        document.getElementById('update-news-btn')?.addEventListener('click', function() {
+            // Logic to handle news update, e.g., showing a form or redirecting to an update page
+            alert('Update berita!');
+        });
+    </script>
+</body>
 
 </html>

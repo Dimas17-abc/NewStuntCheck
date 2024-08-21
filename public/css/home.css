@@ -18,8 +18,50 @@ body {
     border-radius: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     padding: 50px;
+    text-align: left; /* Align text to the left */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+h1 {
     text-align: center;
 }
+
+.profile-container {
+    display: flex;
+    align-items: center; /* Vertically center content */
+    padding: 20px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px; /* Space between image and text */
+}
+
+.profile-text {
+    flex-grow: 1;
+}
+
+.profile-settings {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.edit-icon {
+    font-size: 1.5rem;
+    color: #2e8b57;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+    color: #1e6a3a;
+}
+
 
 h1 {
     color: #2e8b57;
@@ -79,45 +121,6 @@ h2 {
     font-weight: bold;
 }
 
-.bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    padding-top: 10px;
-    border-top: 2px solid #e0e0e0;
-    background-color: #ffffff;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #4caf50;
-    font-size: 0.9rem;
-    text-align: center;
-    flex-grow: 1;
-    padding: 10px 0;
-    transition: color 0.3s ease;
-}
-
-.nav-icon {
-    display: block;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-.nav-link.active {
-    color: #388e3c;
-}
-
-.nav-link.active .nav-icon {
-    color: #388e3c;
-}
-
 /* .profile-container {
     background-color: #ffffff;
     border-radius: 15px;
@@ -144,3 +147,4 @@ h2 {
         width: 100%;
     }
 }
+
