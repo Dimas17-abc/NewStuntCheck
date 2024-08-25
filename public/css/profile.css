@@ -68,10 +68,15 @@ body {
 
 /* Input Group styling */
 .input-group {
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     justify-content: center; 
     align-items: center;
+=======
+    margin-bottom: 15px;
+    text-align: left;
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 }
 
 .input-group label {
@@ -79,7 +84,10 @@ body {
     color: #666;
     font-size: 0.9rem;
     margin-bottom: 5px;
+<<<<<<< HEAD
     justify-content: flex-start;
+=======
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 }
 
 .input-group input {
@@ -91,8 +99,11 @@ body {
     font-size: 1rem;
     color: #333;
     pointer-events: none;
+<<<<<<< HEAD
     position: relative;
     justify-items: center;
+=======
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 }
 
 .logout-button {
@@ -138,4 +149,8 @@ body {
 
 .nav-link.active {
     color: #388e3c;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82

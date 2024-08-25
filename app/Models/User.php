@@ -20,8 +20,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+<<<<<<< HEAD
         'type',
         'profile_photo',
+=======
+        'type'
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
     ];
 
     /**
@@ -56,6 +60,7 @@ class User extends Authenticatable
     protected function type(): Attribute
     {
         return new Attribute(
+<<<<<<< HEAD
             get: fn($value) =>  ["user", "admin", "manager"][$value],
         );
     }
@@ -64,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+=======
+            get: fn ($value) =>  ["user", "admin", "manager"][$value],
+        );
+    }
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 }

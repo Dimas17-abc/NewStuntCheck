@@ -123,6 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -199,4 +200,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     ],
 
+=======
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 ];

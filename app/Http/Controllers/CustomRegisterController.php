@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -32,3 +33,23 @@ class CustomRegisterController extends Controller
         return redirect()->route('profiles.sign_in');
     }
 }
+=======
+use Auth;
+
+class CustomRegisterController extends Controller
+{
+    public function credentials(Request $request)
+    {
+    $tekan = $request->validate([
+        'email' => 'required',
+        'password' => 'required',
+        'password_confirmation' => 'required',
+    ]);
+    if (Auth::attempt($tekan)) {
+        return redirect()->route('profiles.sign_in');
+    } else {
+        return redirect()->back();
+    }
+}
+}
+>>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
