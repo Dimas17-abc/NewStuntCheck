@@ -1,0 +1,99 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f0f8f5;
+    color: #333;
+    text-align: center;
+    padding: 7px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.container {
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+}
+
+.back-icon {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+.back-icon img {
+    display: block;
+}
+
+
+h1 {
+    color: #2e8b57;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #2e8b57;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background-color: #276a46;
+}
+
+.result {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.result h3 {
+    color: #2e8b57;
+    margin-bottom: 10px;
+}
+
+.result p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .back-icon {
+        left: 10px; /* Posisi kiri diubah agar lebih sesuai dengan layar kecil */
+    }
+}
