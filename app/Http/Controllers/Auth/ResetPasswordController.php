@@ -25,9 +25,5 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-<<<<<<< HEAD
     protected $redirectTo = 'menus.home';
-=======
-    protected $redirectTo = '/home';
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 }

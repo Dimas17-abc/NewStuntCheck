@@ -12,20 +12,14 @@
 <body>
     <div class="profile-container">
         <div class="header">
-<<<<<<< HEAD
             <a href="{{ route('menus.home') }}" class="back-icon">
                 <img src="{{ asset('images/back.png') }}" alt="Back" style="width: 24px;">
-=======
-            <a href="#" class="back-icon">
-                <img src="{{ asset('image/back.png') }}" alt="Back" style="width: 24px;">
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
             </a>
             <h2>Profile</h2>
             <span class="edit-icon">✏️</span>
         </div>
 
         <div class="profile-pic">
-<<<<<<< HEAD
             <!-- Menggunakan Auth::user() untuk mendapatkan foto profil -->
             <img src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('images/human.png') }}" alt="Profile Picture" id="profileImage">
             <form action="{{ route('profile.update.photo') }}" method="POST" enctype="multipart/form-data">
@@ -35,27 +29,15 @@
             </form>
         </div>
         
+        
         <div class="input-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
-=======
-            <img src="{{ asset('image/human.png') }}" alt="Profile Picture">
-            <span class="edit-photo-icon">✏️</span>
-        </div>
-
-        <div class="input-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" value="Echa Hessa Maulidia" readonly>
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
         </div>
 
         <div class="input-group">
             <label for="email">Email Address</label>
-<<<<<<< HEAD
             <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
-=======
-            <input type="email" id="email" name="email" value="echessa@gmail.com" readonly>
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
         </div>
 
         <div class="input-group">
@@ -67,17 +49,7 @@
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout-button">LOGOUT</button>
-<<<<<<< HEAD
         </form> 
-=======
-        </form>
-
-        <div class="bottom-nav">
-            <a href="#" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
-            <a href="#" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
-            <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
-        </div>
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
     </div>
 </body>
 

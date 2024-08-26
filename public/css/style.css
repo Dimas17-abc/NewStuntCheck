@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 100px;
-    width: 30%;
+    width: 100%;
     margin: auto;
     display: flex;
     align-items: center;
@@ -27,17 +27,12 @@ body {
 }
 
 .container {
-<<<<<<< HEAD
     width: 150px;
     height: 100%;
     max-width: 2048px;
-=======
-    width: 100%;
-    max-width: 1024px;
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
     margin: 0 auto;
-    padding: 30px;
-    background-color: #E0FFE0;
+    padding: 100px;
+    background-color: #A4FFA4;
     border-radius: 10px;
     align-items: center;
     text-align: center;
@@ -54,11 +49,7 @@ body {
     margin-top: 20px;
 }
 
-<<<<<<< HEAD
 @media (min-width: 1024px) {
-=======
-@media (min-width: 600px) {
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
     .container {
         padding: 50px;
     }
@@ -78,8 +69,4 @@ body {
     .get-started-btn {
         font-size: 18px;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82

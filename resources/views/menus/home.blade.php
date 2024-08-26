@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-
-=======
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StuntCheck</title>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-<<<<<<< HEAD
 
 </head>
 
@@ -22,10 +17,11 @@
             </div>
             <div class="profile-settings">
                 <a href="{{ route('profiles.setting') }}">
-                    <img src="{{ asset('images/human.png') }}" alt="" width="65px">
+                    <img src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('images/human.png') }}" alt="Profile Picture" style="width: 60px" height="50px" style="border-radius: 20%">
                 </a>
             </div>
         </div>
+        
         <!-- Artikel Stunting -->
         <div class="content-box">
             <h3>Berita Terkini Tentang Stunting di Indonesia</h3>
@@ -178,37 +174,4 @@
     </script>
 </body>
 
-=======
-</head>
-<body>
-    <div class="container">
-        <h1>Hello Echa</h1>
-        <h2>Selamat Datang di StuntCheck!</h2>
-        <div class="grid">
-            <div class="card">
-                <i class="icon">📄</i>
-                <p>Artikel</p>
-            </div>
-            <div class="card">
-                <i class="icon">📊</i>
-                <p>Data Tahunan</p>
-            </div>
-            <div class="card">
-                <i class="icon">🥕🍎</i>
-                <p>Nutrisi</p>
-            </div>
-            <div class="card">
-                <i class="icon">🧮</i>
-                <p>Kalkulator</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
-        <a href="#" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
-        <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
-    </div>
-</body>
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 </html>

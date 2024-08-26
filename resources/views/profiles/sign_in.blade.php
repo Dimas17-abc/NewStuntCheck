@@ -41,18 +41,17 @@
             </div>
         </form>
         <div>
-            <a href="{{ route('password.request') }}" class="password">Lupa Password?</a>
+            <p>
+                <a href="{{ route('password.request') }}" class="password">Lupa Password?</a>
+            </p>
         </div>
         <div class="sign-up-prompt">
-            <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Sign Up</a></p>
+            <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Daftar</a></p>
         </div>
     </div>
-<<<<<<< HEAD
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/sign_in.js') }}"></script> --}}
-    
-=======
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
+
 </body>
 
 </html>

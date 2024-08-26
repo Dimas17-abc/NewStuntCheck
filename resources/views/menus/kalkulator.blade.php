@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Pertumbuhan</title>
     <link rel="stylesheet" href="{{ asset('css/kalku.css') }}">
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 </head>
 <body>
-    <div class="container">
+    {{-- <div class="container">
         <a href="{{ route('menus.home') }}" class="back-icon">
             <img src="{{ asset('images/back.png') }}" alt="Back" style="width: 24px;">
         </a>
@@ -36,8 +35,7 @@
             <div class="input-group">
                 <label for="gender">Jenis Kelamin</label>
                 <select id="gender" name="gender" required>
-=======
-</head>
+</head> --}}
 <body>
     <div class="container">
         <h1>Kalkulator Pertumbuhan</h1>
@@ -62,12 +60,11 @@
             <div class="input-group">
                 <label for="gender">Jenis Kelamin</label>
                 <select id="gender" name="gender">
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
+
                     <option value="male">Laki-Laki</option>
                     <option value="female">Perempuan</option>
                 </select>
             </div>
-<<<<<<< HEAD
             <button type="submit" class="btn btn-success">Hitung Pertumbuhan</button>
 
             <div class="result">
@@ -117,25 +114,6 @@
 
     <div>
         
-=======
-            <button type="submit" class="btn">Hitung Pertumbuhan</button>
-        </form>
-        <div class="result">
-            <h3>Hasil Perhitungan</h3>
-            <p>Nama: </p>
-            <p>Umur:    bulan</p>
-            <p>Tinggi:  cm</p>
-            <p>Berat:   kg</p>
-            <p>Kategori:    </p>
-            <button class="btn">Simpan Hasil Ukur</button>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="#" class="nav-link active"><span class="nav-icon">➕</span> Health</a>
-        <a href="#" class="nav-link"><span class="nav-icon">🏠</span> Home</a>
-        <a href="#" class="nav-link"><span class="nav-icon">👤</span> Profile</a>
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
     </div>
 </body>
 </html>

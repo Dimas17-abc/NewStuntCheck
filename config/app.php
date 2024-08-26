@@ -123,7 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -161,7 +160,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -200,6 +198,4 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     ],
 
-=======
->>>>>>> 439e065beafc921ae4803bf84f22e5d816594b82
 ];
