@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\DB; // Import DB facade
 use Illuminate\Support\Facades\Hash; // Import Hash facade
 
 class CreateUsersSeeder extends Seeder
@@ -15,14 +16,20 @@ class CreateUsersSeeder extends Seeder
      */
     public function run()
     {
+
+        // Data user yang akan dimasukkan
         $users = [
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'type' => 1,
                 'password' => Hash::make('admin123'),
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
+
+        // Memasukkan data user ke dalam database
         foreach ($users as $user) {
             User::create($user);
         }

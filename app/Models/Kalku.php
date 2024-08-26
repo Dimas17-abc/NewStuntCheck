@@ -10,6 +10,12 @@ class Kalku extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'age', 'height', 'weight', 'gender', 'category',
+        'name', 'age', 'height', 'weight', 'gender', 'category', 'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+

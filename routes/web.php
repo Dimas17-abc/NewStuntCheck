@@ -41,7 +41,6 @@ Route::middleware('auth')->group(function () {
     });
     // Kalkulator Routes
     Route::post('/menus/kalkulator/hitung', [KalkulatorController::class, 'calculate'])->name('kalkulator.hitung');
-    Route::get('/menus/kalkulator/results', [KalkulatorController::class, 'showResults'])->name('kalkulator.results');
     Route::get('/kalkulator/export-pdf', [KalkulatorController::class, 'exportPDF'])->name('kalkulator.export-pdf');
 });
 
@@ -65,10 +64,21 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
 });
 
-// Manager Routes
-Route::middleware(['auth', 'user-access:manager'])->group(function () {
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/admin/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/admin/news', [NewsController::class, 'store'])->name('news.store');
+    Route::get('/admin/stunting/create', [StuntingController::class, 'create'])->name('stunting.create');
+    Route::post('/admin/stunting', [StuntingController::class, 'store'])->name('stunting.store');
+    Route::get('/admin/rekomendasi/create', [RekomendasiController::class, 'create'])->name('rekomendasi.create');
+    Route::post('/admin/rekomendasi', [RekomendasiController::class, 'store'])->name('rekomendasi.store');
 });
+
+Route::get('news/create', [NewsController::class, 'create'])->name('news.create');
+Route::get('food-recommendations/create', [FoodRecommendationsController::class, 'create'])->name('food-recommendations.create');
+Route::get('admin/download-users', [AdminController::class, 'downloadUsers'])->name('admin.download-users');
+
+
 
 // Custom Authentication Routes
 Route::post('/login/credentials', [App\Http\Controllers\CustomLoginController::class, 'credentials'])->name('credentials');

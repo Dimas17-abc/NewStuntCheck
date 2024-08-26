@@ -53,14 +53,14 @@ class User extends Authenticatable
      * @param  string  $value
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function type(): Attribute
+    protected function role(): Attribute
     {
         return new Attribute(
             get: fn($value) =>  ["user", "admin", "manager"][$value],
         );
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }

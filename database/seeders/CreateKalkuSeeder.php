@@ -20,6 +20,7 @@ class CreateKalkuSeeder extends Seeder
                 'height' => 175,
                 'weight' => 70,
                 'category' => 1, // Adjust according to your category logic
+                'gender' =>  'male',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -29,6 +30,7 @@ class CreateKalkuSeeder extends Seeder
                 'height' => 165,
                 'weight' => 60,
                 'category' => 2, // Adjust according to your category logic
+                'gender' => 'female',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -36,6 +38,6 @@ class CreateKalkuSeeder extends Seeder
         ];
 
         // Insert data into the kalku table
-        DB::table('kalku')->insert($data);
+        DB::table('kalkus')->insert($data);
     }
 }

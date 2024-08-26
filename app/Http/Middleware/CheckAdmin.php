@@ -9,10 +9,10 @@ class CheckAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || !auth()->user()->is_admin) {
-            abort(403, 'Unauthorized action.');
+        if (auth()->user() && auth()->user()->role == 'admin') {
+            return $next($request);
         }
-
-        return $next($request);
+    
+        return redirect('/menus/home')->with('error', "Anda tidak memiliki akses ke halaman ini.");
     }
 }
