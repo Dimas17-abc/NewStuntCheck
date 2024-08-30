@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\DB; // Import DB facade
-use Illuminate\Support\Facades\Hash; // Import Hash facade
+use Illuminate\Support\Facades\Hash;
 
 class CreateUsersSeeder extends Seeder
 {
@@ -16,9 +15,8 @@ class CreateUsersSeeder extends Seeder
      */
     public function run()
     {
-
         // Data user yang akan dimasukkan
-        $users = [
+        $user = [
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
@@ -30,7 +28,7 @@ class CreateUsersSeeder extends Seeder
         ];
 
         // Memasukkan data user ke dalam database
-        foreach ($users as $user) {
+        foreach ($user as $user) {
             User::create($user);
         }
     }

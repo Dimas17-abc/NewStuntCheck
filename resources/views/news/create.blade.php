@@ -1,3 +1,5 @@
+<!-- resources/views/news/create.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
@@ -6,27 +8,28 @@
     
     <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
         <div class="form-group">
-            <label for="title">Judul Berita</label>
-            <input type="text" id="title" name="title" class="form-control" required>
+            <label for="title">Judul</label>
+            <input type="text" name="title" id="title" class="form-control" required>
         </div>
 
         <div class="form-group">
             <label for="content">Konten</label>
-            <textarea id="content" name="content" class="form-control" required></textarea>
+            <textarea name="content" id="content" rows="5" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
-            <label for="source">Sumber Berita (Link)</label>
-            <input type="url" id="source" name="source" class="form-control">
+            <label for="source">Sumber</label>
+            <input type="text" name="source" id="source" class="form-control">
         </div>
 
         <div class="form-group">
-            <label for="food_image">Gambar Berita</label>
-            <input type="file" id="food_image" name="food_image" class="form-control">
+            <label for="image">Gambar (Opsional)</label>
+            <input type="file" name="image" id="image" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-success">Tambah Berita</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>
 @endsection

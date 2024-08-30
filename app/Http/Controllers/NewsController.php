@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Http\Request;
+use Hash;
+use Auth;
 
 class NewsController extends Controller
 {
@@ -14,58 +16,29 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input dari form
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'sumber' => 'nullable|url',
-            'foto_makanan' => 'nullable|image|max:2048',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'source' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // Cek apakah ada file gambar yang di-upload
-        if ($request->hasFile('foto_makanan')) {
-            $validated['foto_makanan'] = $request->file('foto_makanan')->store('news_images', 'public');
-        }
-
-        // Membuat berita baru dengan data yang divalidasi
-        News::create($validated);
-
-        // Redirect ke halaman index berita dengan pesan sukses
-        return redirect()->route('news.index')->with('success', 'Berita berhasil ditambahkan.');
-    }
-
-    public function edit($id)
-    {
-        // Cari berita berdasarkan ID
-        $news = News::findOrFail($id);
-
-        // Tampilkan formulir untuk memperbarui berita
-        return view('news.edit', compact('news'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'sumber' => 'nullable|url',
-            'data_stunting' => 'nullable|integer',
-            'rekomendasi_makanan' => 'nullable|string|max:255',
-            'foto_makanan' => 'nullable|image|max:2048',
-            'sumber_makanan' => 'nullable|url',
+        $imagePath = $request->file('image')
+            ? $request->file('image')->store('news_images', 'public')
+            : null; // Simpan gambar jika ada
+        News::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'source' => $request->input('source', 'default_source_value'),
+            'image' => $imagePath,
         ]);
 
-        // Cek apakah ada file gambar baru yang di-upload
-        if ($request->hasFile('foto_makanan')) {
-            $validated['foto_makanan'] = $request->file('foto_makanan')->store('foto_makanans', 'public');
-        }
+        return redirect()->route('menus.home')->with('success', 'Berita berhasil ditambahkan.');
+    }
 
-        // Cari berita berdasarkan ID dan perbarui isinya
-        $news = News::findOrFail($id);
-        $news->update($validated);
-
-        // Redirect ke halaman index berita dengan pesan sukses
-        return redirect()->route('news.index')->with('success', 'Berita berhasil diperbarui.');
+    public function index()
+    {
+        $news = News::all();
+        return view('menus.home', compact('news'));
     }
 }

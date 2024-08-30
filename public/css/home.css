@@ -49,6 +49,13 @@ h1 {
     position: absolute;
     top: 40px;
     right: 40px;
+    border-radius: 50%;
+}
+
+.profile-settings img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
 
 .profile-link {
@@ -162,6 +169,14 @@ h2 {
     background-color: #276b45; /* Warna saat di-hover */
 }
 
+.news-item h2{
+    text-align: justify;
+    color: black;
+}
+
+.news-item p{
+    text-align: justify;
+}
 @media (max-width: 600px) {
     .container {
         padding: 30px;

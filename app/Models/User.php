@@ -35,33 +35,34 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
      * @return array
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     /**
-     * Interact with the user's first name.
+     * Interact with the user's role.
      *
-     * @param  string  $value
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function role(): Attribute
     {
-        return new Attribute(
-            get: fn($value) =>  ["user", "admin", "manager"][$value],
+        return Attribute::make(
+            get: fn($value) => ["user", "admin", "manager"][$value],
         );
     }
 
+    /**
+     * Check if the user is an admin.
+     *
+     * @return bool
+     */
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->type === 1; // Assuming '1' represents the admin role
     }
 }
