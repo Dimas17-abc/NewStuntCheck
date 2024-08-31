@@ -2,59 +2,49 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\FoodRecommendation;
 
 class FoodRecommendationController extends Controller
 {
-    // public function index()
-    // {
-    //     // Ambil data rekomendasi makanan dari database
-    //     $foodRecommendations = FoodRecommendation::all();
-
-    //     // Kirim data ke view
-    //     return view('menus.home', compact('foodRecommendations'));
-    // }
-
+    // Menampilkan halaman untuk membuat rekomendasi makanan baru
     public function create()
     {
         return view('food-recommendations.create');
     }
 
+    // Menyimpan rekomendasi makanan baru ke dalam database
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'source' => 'nullable|string|max:255',
+            'description' => 'required|string',
+            'source' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $foodRecommendation = new FoodRecommendation();
-        $foodRecommendation->title = $request->title;
-        $foodRecommendation->content = $request->content;
-        $foodRecommendation->source = $request->source;
+        $foodRecommendation->title = $request->input('title');
+        $foodRecommendation->description = $request->input('description');
+        $foodRecommendation->source = $request->input('source');    
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('food_images', 'public');
+            $foodRecommendation->image = $imagePath;
+        }
+    
+        $foodRecommendation->save();
+    
 
-        
-    if ($request->hasFile('image')) {
-        $path = $request->file('image')->store('food_recommendations', 'public');
-        $foodRecommendation->image = basename($path);
+        // Redirect setelah menyimpan
+        return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
     }
 
-    $foodRecommendation->save();
-
-    return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
-}
-
+    // Menampilkan semua rekomendasi makanan
     public function index()
     {
         $foodRecommendations = FoodRecommendation::all();
         return view('menus.home', compact('foodRecommendations'));
     }
-    // public function showRecommendations()
-    // {
-    //     $foodRecommendations = FoodRecommendation::all(); // Ambil semua rekomendasi makanan dari database
-    //     return view('menus.home', compact('foodRecommendations'));
-    // }
 }

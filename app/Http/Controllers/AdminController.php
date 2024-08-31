@@ -7,7 +7,7 @@ use App\Models\News;
 use App\Models\User;
 use App\Models\FoodRecommendation;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use PDF; // Pastikan ini adalah namespace yang benar untuk PDF
 
 class AdminController extends Controller
 {
@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         // Memastikan hanya admin yang bisa mengakses controller ini
         $this->middleware('auth');
-        $this->middleware('CheckAdmin');  // Pastikan middleware ini hanya membiarkan admin masuk
+        $this->middleware('CheckAdmin'); // Middleware untuk akses admin
     }
 
     // Menampilkan halaman dashboard admin
@@ -24,22 +24,12 @@ class AdminController extends Controller
         // Mengambil semua berita terbaru
         $news = News::all();
 
-        // Data stunting per tahun
-        // $stuntingData = [
-        //     '2019' => 30,
-        //     '2020' => 29,
-        //     '2021' => 28,
-        //     '2022' => 27.5,
-        //     '2023' => 27,
-        // ];
-
         // Mengambil semua rekomendasi makanan
         $foodRecommendations = FoodRecommendation::all();
 
         // Mengirim semua data ke view 'menus.home'
         return view('menus.home', [
             'news' => $news,
-            // 'stuntingData' => $stuntingData,
             'foodRecommendations' => $foodRecommendations
         ]);
     }
@@ -94,12 +84,12 @@ class AdminController extends Controller
     }
 
     // Download data user dalam bentuk PDF
-    public function downloadUsers()
+    public function downloadUsersPDF()
     {
         $users = User::all();
-        $pdf = PDF::loadView('admin.users_pdf', compact('users'));
+        $pdf = PDF::loadView('pdf.users', compact('users'));
 
-        return $pdf->download('data_user.pdf');
+        return $pdf->download('users.pdf');
     }
 
     // Menampilkan halaman form berita baru
@@ -113,11 +103,4 @@ class AdminController extends Controller
     {
         return view('food_recommendations.create');
     }
-
-    //     public function showRecommendations()
-    // {
-    //     $foodRecommendations = FoodRecommendation::all(); // Ambil semua rekomendasi makanan dari database
-    //     return view('menus.home', ['foodRecommendations' => $foodRecommendations]);
-
-    // }
 }

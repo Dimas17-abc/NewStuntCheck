@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('food_recommendations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image')->nullable();
             $table->string('source')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('food_recommendations');
     }

@@ -15,8 +15,8 @@
         </div>
 
         <div class="form-group">
-            <label for="content">Konten</label>
-            <textarea name="content" id="content" rows="5" class="form-control" required></textarea>
+            <label for="content">Isi</label>
+            <textarea name="description" id="content" rows="5" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
@@ -25,10 +25,9 @@
         </div>
 
         <div class="form-group">
-            <label for="image">Gambar (Opsional)</label>
+            <label for="image">Gambar</label>
             <input type="file" name="image" id="image" class="form-control">
         </div>
-
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 </div>

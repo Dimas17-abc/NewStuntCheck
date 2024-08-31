@@ -32,7 +32,7 @@
 
         <div class="form-group">
             <label for="source">Sumber</label>
-            <input type="text" name="source" id="source" class="form-control">
+            <input type="text" name="source" id="source" class="form-control" required>
         </div>
 
         <div class="form-group">

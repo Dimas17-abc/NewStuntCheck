@@ -71,8 +71,8 @@ class News extends Model
 
     protected $fillable = [
         'title',
-        'content',
-        'source',
+        'description',
         'image',
+        'source',
     ];
 }

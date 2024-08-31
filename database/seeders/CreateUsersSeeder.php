@@ -16,7 +16,7 @@ class CreateUsersSeeder extends Seeder
     public function run()
     {
         // Data user yang akan dimasukkan
-        $user = [
+        $users = [
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
@@ -28,7 +28,7 @@ class CreateUsersSeeder extends Seeder
         ];
 
         // Memasukkan data user ke dalam database
-        foreach ($user as $user) {
+        foreach ($users as $user) {
             User::create($user);
         }
     }

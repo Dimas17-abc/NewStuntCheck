@@ -38,18 +38,24 @@
                 @foreach ($news as $newsItem)
                     <div class="news-item">
                         <h2>{{ $newsItem->title }}</h2>
-                        <p>{{ $newsItem->content }}</p>
+                        <p>{{ $newsItem->description }}</p>
+                        @if ($newsItem->source)
+                            <p><a href="{{ $newsItem->source }}" target="_blank">{{ $newsItem->source }}</a></p>
+                        @endif
                         @if ($newsItem->image)
                             <!-- Cek apakah gambar ada -->
-                            <img src="{{ asset('storage/news_images' . $newsItem->image) }}" alt="b"
+                            <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar"
                                 style="max-width: 100%; height: auto;">
                         @else
                             <p>Tidak ada gambar</p>
                         @endif
+
                     </div>
                 @endforeach
             </div>
         </div>
+
+
 
 
 
@@ -71,7 +77,7 @@
             <h1 style="text-align: center">Rekomendasi Makanan</h1>
             <div class="container">
                 @foreach ($foodRecommendations as $foodRecommendation)
-                    <div class="news-item">
+                    <div class="food-item">
                         <h2>{{ $foodRecommendation->title }}</h2>
                         <p>{{ $foodRecommendation->description }}</p>
                         @if ($foodRecommendation->image)
@@ -81,7 +87,7 @@
                         @else
                             <p>Tidak ada gambar</p>
                         @endif
-                        
+
                     </div>
                 @endforeach
 
@@ -89,38 +95,20 @@
 
             <!-- Kalkulator Pertumbuhan -->
             @include('menus.kalkulator')
-            @if (Auth::user()->isAdmin())
-                <a href="{{ route('news.create') }}" class="btn btn-success float-right">
-                    Download data user
-                </a>
-            @endif
+            <div>
+                <div>
+                    @if (Auth::user()->isAdmin())
+                        <a href="{{ route('admin.download-users-pdf') }}" class="btn btn-primary float-right mr-2">
+                            Download data user (PDF)
+                        </a>
+                    @endif
+                </div>
+
+
+            </div>
         </div>
 
-        {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Chart.js configuration
-        const ctx = document.getElementById('stuntingChart').getContext('2d');
-        const stuntingChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023'],
-                datasets: [{
-                    label: 'Prevalensi Stunting (%)',
-                    data: [30, 29, 28, 27.5, 27],
-                    backgroundColor: 'rgba(39, 174, 96, 0.7)',
-                    borderColor: 'rgba(39, 174, 96, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script> --}}
+
 </body>
 
 </html>

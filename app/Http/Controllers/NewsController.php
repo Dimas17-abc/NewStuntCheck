@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
 use Illuminate\Http\Request;
-use Hash;
-use Auth;
+use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -16,23 +14,28 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'description' => 'required|string',
             'source' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $imagePath = $request->file('image')
-            ? $request->file('image')->store('news_images', 'public')
-            : null; // Simpan gambar jika ada
-        News::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'source' => $request->input('source', 'default_source_value'),
-            'image' => $imagePath,
-        ]);
+       $news = new News();
+       $news->title = $request->input('title');
+       $news->description = $request->input('description');
+       $news->source = $request->input('source');
 
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('news_images', 'public');
+           $news->image = $imagePath;
+        }
+    
+       $news->save();
+
+        // Redirect setelah menyimpan
         return redirect()->route('menus.home')->with('success', 'Berita berhasil ditambahkan.');
     }
 

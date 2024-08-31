@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class FoodRecommendation extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'image', 'source'];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'image', 
+        'source',
+    ];
     // public function FoodRecommendation()
     // {
     //     return $this->belongsTo(FoodRecommendation::class);

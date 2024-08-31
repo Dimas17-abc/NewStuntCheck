@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->text('description');
+            $table->text('source')->nullable(); // Menyimpan sumber berita (link)
             $table->string('image')->nullable(); // Menyimpan path gambar berita (nullable jika tidak ada gambar)
-            $table->text('source'); // Menyimpan sumber berita (link)
             $table->timestamps();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('news');
     }

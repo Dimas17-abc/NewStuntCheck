@@ -95,6 +95,7 @@ body {
     justify-items: center;
 }
 
+/* Logout Button styling */
 .logout-button {
     background-color: #4caf50;
     color: white;
@@ -138,4 +139,57 @@ body {
 
 .nav-link.active {
     color: #388e3c;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h2 {
+        font-size: 1.2rem;
+    }
+
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-pic img {
+        border-radius: 15%;
+    }
+
+    .edit-photo-icon {
+        bottom: 0;
+        right: 0;
+        padding: 4px;
+    }
+
+    .input-group label {
+        font-size: 0.9rem;
+    }
+
+    .input-group input {
+        font-size: 0.9rem;
+    }
+
+    .logout-button {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+
+    .bottom-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    .nav-icon {
+        font-size: 1.3rem;
+    }
 }
