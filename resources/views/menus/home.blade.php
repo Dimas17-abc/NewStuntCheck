@@ -25,89 +25,95 @@
 
         <!-- Tombol Tambah Berita, Tambah Rekomendasi Makanan, dan Download Data User Khusus untuk Admin -->
         @if (Auth::user()->isAdmin())
-            <div class="admin-actions">
-                <a href="{{ route('news.create') }}" class="btn btn-success float-right">Tambah Berita</a>
-            </div>
-        @endif
-
-        <!-- Artikel Stunting -->
-        <div class="content-box">
-            <h3>Berita Terkini Tentang Stunting di Indonesia</h3>
-            <div class="container">
-                <h1>Berita Terbaru</h1>
+        <div class="admin-actions">
+            <a href="{{ route('news.create') }}" class="btn btn-success float-left m-2">Tambah Berita</a>
+            <!-- Anda dapat menggunakan inline-block untuk tombol edit dan hapus jika menggunakan flexbox -->
+            <div class="admin-buttons float-left">
                 @foreach ($news as $newsItem)
-                    <div class="news-item">
-                        <h2>{{ $newsItem->title }}</h2>
-                        <p>{{ $newsItem->description }}</p>
-                        @if ($newsItem->source)
-                            <p><a href="{{ $newsItem->source }}" target="_blank">{{ $newsItem->source }}</a></p>
-                        @endif
-                        @if ($newsItem->image)
-                            <!-- Cek apakah gambar ada -->
-                            <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar"
-                                style="max-width: 100%; height: auto;">
-                        @else
-                            <p>Tidak ada gambar</p>
-                        @endif
-
-                    </div>
+                    <a href="{{ route('news.edit', $newsItem->id) }}" class="btn btn-warning m-2">Edit</a>
+                    <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger m-2">Hapus</button>
+                    </form>
                 @endforeach
             </div>
         </div>
-
-
-
-
-
-        <!-- Data Tahunan Stunting -->
-        <div class="content-box">
-            <h3>Data Tahunan Stunting (2019-2023)</h3>
-            <canvas id="stuntingChart"></canvas>
+    @endif
+    
+    <!-- Artikel Stunting -->
+    <div class="content-box">
+        <div class="container">
+            <h3>Berita Tentang Stunting di Indonesia</h3>
+            <h1>Berita Terbaru</h1>
+            @foreach ($news as $newsItem)
+                <div class="news-item">
+                    <h2>{{ $newsItem->title }}</h2>
+                    <p>{{ $newsItem->description }}</p>
+                    @if ($newsItem->source)
+                        <p><a href="{{ $newsItem->source }}" target="_blank">{{ $newsItem->source }}</a></p>
+                    @endif
+                    @if ($newsItem->image)
+                        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar" style="max-width: 80%; height: auto;">
+                    @else
+                        <p>Tidak ada gambar</p>
+                    @endif
+                </div>
+            @endforeach
         </div>
-
+    </div>
+          
         <!-- Artikel Nutrisi -->
         <div class="content-box">
             <section>
                 @if (Auth::user()->isAdmin())
-                    <a href="{{ route('food-recommendations.create') }}" class="btn btn-success float-right">
-                        Tambah Rekomendasi Makanan
-                    </a>
+                    <div class="admin-actions">
+                        <a href="{{ route('food-recommendations.create') }}" class="btn btn-success float-left m-2">
+                            Tambah Rekomendasi Makanan
+                        </a>
+                        <!-- Tombol Edit dan Hapus -->
+                            @foreach ($foodRecommendations as $foodRecommendation)
+                                <a href="{{ route('food-recommendations.edit', $foodRecommendation->id) }}" class="btn btn-warning float-left m-2">Edit</a>
+                                <form action="{{ route('food-recommendations.destroy', $foodRecommendation->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger float-left m-2">Hapus</button>
+                                </form>
+                            @endforeach
+                    </div>
                 @endif
             </section>
-            <h1 style="text-align: center">Rekomendasi Makanan</h1>
+        
             <div class="container">
+                <h1 style="text-align: center">Rekomendasi Makanan</h1>
                 @foreach ($foodRecommendations as $foodRecommendation)
                     <div class="food-item">
                         <h2>{{ $foodRecommendation->title }}</h2>
                         <p>{{ $foodRecommendation->description }}</p>
                         @if ($foodRecommendation->image)
-                            <!-- Cek apakah gambar ada -->
-                            <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar"
-                                style="max-width: 100%; height: auto;">
+                            <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar" style="max-width: 80%; height: auto;">
                         @else
                             <p>Tidak ada gambar</p>
                         @endif
-
                     </div>
                 @endforeach
-
             </div>
+        </div>
+        
 
-            <!-- Kalkulator Pertumbuhan -->
+        <!-- Kalkulator Pertumbuhan -->
+        <div class="content-box kalkulator-container">
             @include('menus.kalkulator')
             <div>
                 <div>
                     @if (Auth::user()->isAdmin())
-                        <a href="{{ route('admin.download-users-pdf') }}" class="btn btn-primary float-right mr-2">
+                        <a href="{{ route('admin.downloadPdf') }}" class="btn btn-primary float-left m-2">
                             Download data user (PDF)
                         </a>
                     @endif
                 </div>
-
-
             </div>
         </div>
-
 
 </body>
 

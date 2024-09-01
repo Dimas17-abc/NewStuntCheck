@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\FoodRecommendationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KalkulatorController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\StuntingController;
 use App\Http\Controllers\PDFAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckAdmin;
 
 // Route utama
 Route::get('/', function () {
@@ -20,8 +23,8 @@ Route::get('/', function () {
 Auth::routes(); // Menyediakan route untuk login, registrasi, dan reset password
 
 // Route otentikasi khusus
-Route::post('/login/credentials', [App\Http\Controllers\CustomLoginController::class, 'credentials'])->name('credentials');
-Route::post('/register', [App\Http\Controllers\CustomRegisterController::class, 'register'])->name('register');
+Route::post('/login/credentials', [CustomLoginController::class, 'credentials'])->name('credentials');
+Route::post('/register', [CustomRegisterController::class, 'register'])->name('register');
 
 // Route Profil
 Route::get('/profiles/sign_in', function () {
@@ -37,7 +40,7 @@ Route::middleware('auth')->group(function () {
     // Route utama
     Route::get('/menus/home', [HomeController::class, 'index'])->name('menus.home');
     Route::get('/menus/kalkulator', [KalkulatorController::class, 'index'])->name('menus.kalkulator');
-
+    
     // Route Profil
     Route::get('/profiles/setting', [ProfileController::class, 'showProfile'])->name('profiles.setting');
     Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.update.photo');
@@ -55,6 +58,9 @@ Route::prefix('news')->group(function () {
     Route::get('/create', [NewsController::class, 'create'])->name('news.create');
     Route::post('/', [NewsController::class, 'store'])->name('news.store');
     Route::get('/', [NewsController::class, 'index'])->name('news.index');
+    Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
+    Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
 });
 
 // Route Rekomendasi Makanan
@@ -62,33 +68,32 @@ Route::prefix('food-recommendations')->group(function () {
     Route::get('/create', [FoodRecommendationController::class, 'create'])->name('food-recommendations.create');
     Route::post('/', [FoodRecommendationController::class, 'store'])->name('food-recommendations.store');
     Route::get('/', [FoodRecommendationController::class, 'index'])->name('food-recommendations.index');
-});
-// Middleware untuk akses admin
-Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
-    // Rute untuk mengunduh data pengguna dalam bentuk PDF
-    Route::get('/download-users-pdf', [PDFAdminController::class, 'downloadUsersPDF'])->name('admin.download-users-pdf');
-    // Rute untuk ekspor PDF kalkulator
-    Route::get('/export-pdf', [PDFAdminController::class, 'exportPDF'])->name('admin.export-pdf');
+    Route::get('/{id}/edit', [FoodRecommendationController::class, 'edit'])->name('food-recommendations.edit');
+    Route::put('/{id}', [FoodRecommendationController::class, 'update'])->name('food-recommendations.update');
+    Route::delete('/{id}', [FoodRecommendationController::class, 'destroy'])->name('food-recommendations.destroy');
 });
 
+// Route Stunting
+// Route::prefix('stunting')->group(function () {
+//     Route::get('/create', [StuntingController::class, 'create'])->name('stunting.create');
+//     Route::post('/', [StuntingController::class, 'store'])->name('stunting.store');
+// });
 
+// // Middleware untuk akses admin
+// Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(function () {
+    //     // Rute untuk mengunduh data pengguna dalam bentuk PDF
+    //     Route::get('/download-users-pdf', [PDFAdminController::class, 'downloadUsersPDF'])->name('admin.download-users-pdf');
+//     // Rute untuk ekspor PDF kalkulator
+//     Route::get('/export-pdf', [PDFAdminController::class, 'exportPDF'])->name('admin.export-pdf');
+// });
+
+
+Route::get('/admin/download-pdf', [PDFAdminController::class, 'downloadPdf'])->name('admin.downloadPdf');
 
     
-    // Route Stunting
-    Route::prefix('stunting')->group(function () {
-        Route::get('/create', [StuntingController::class, 'create'])->name('stunting.create');
-        Route::post('/', [StuntingController::class, 'store'])->name('stunting.store');
-    });
-
-    // Route Rekomendasi Makanan
-    Route::prefix('food-recommendations')->group(function () {
-        Route::get('/create', [FoodRecommendationController::class, 'create'])->name('food-recommendations.create');
-        Route::post('/', [FoodRecommendationController::class, 'store'])->name('food-recommendations.store');
-        Route::get('/', [FoodRecommendationController::class, 'index'])->name('food-recommendations.index');
-    });
 
 // Route Pengguna dengan middleware user
-Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/regis', [HomeController::class, 'index'])->name('regis');
-});
+// Route::middleware(['auth', 'user-access:user'])->group(function () {
+//     Route::get('/home', [HomeController::class, 'index'])->name('home');
+//     Route::get('/regis', [HomeController::class, 'index'])->name('regis');
+// });

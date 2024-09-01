@@ -40,18 +40,10 @@
                 <button type="submit" class="sign-up-button">Masuk</button>
             </div>
         </form>
-        <div>
-            <p>
-                <a href="{{ route('password.request') }}" class="password">Lupa Password?</a>
-            </p>
-        </div>
         <div class="sign-up-prompt">
             <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Daftar</a></p>
         </div>
     </div>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/sign_in.js') }}"></script> --}}
-
 </body>
 
 </html>

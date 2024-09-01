@@ -7,19 +7,6 @@
     {{-- <h1>Tambah Rekomendasi Makanan</h1> --}}
     <form action="{{ route('food-recommendations.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        {{-- <label for="title">Judul:</label>
-        <input type="text" id="title" name="title" required>
-
-        <label for="description">Isi:</label>
-        <textarea id="description" name="description" required></textarea>
-
-        <label for="image">Gambar:</label>
-        <input type="file" id="image" name="image">
-        
-        <label for="source">Sumber:</label>
-        <input type="text" id="source" name="source">
-
-        <button type="submit">Simpan</button> --}}
         <div class="form-group">
             <label for="title">Judul</label>
             <input type="text" name="title" id="title" class="form-control" required>

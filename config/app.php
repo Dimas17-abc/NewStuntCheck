@@ -189,7 +189,6 @@ return [
 
     'aliases' => [
         'App' => Illuminate\Support\Facades\App::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Log' => Illuminate\Support\Facades\Log::class,
@@ -197,6 +196,7 @@ return [
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

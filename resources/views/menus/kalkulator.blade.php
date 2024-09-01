@@ -74,7 +74,7 @@
         </table>
 
         <form action="{{ route('kalkulator.export-pdf') }}" method="GET" style="margin-top: 20px;">
-            <button type="submit" class="btn btn-primary">Download PDF</button>
+            <button type="submit" class="btn btn-primary" target="_blank">Download PDF</button>
         </form>
         @endif
     </div>

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // Tambahkan kolom user_id
             $table->string('name');
             $table->integer('age');
-            $table->decimal('height', 5, 2);
-            $table->decimal('weight', 5, 2);
+            $table->integer('height');
+            $table->integer('weight');
             $table->string('gender');
+            // $table->string('economicStatus');
             $table->string('category');
             $table->timestamps();
 

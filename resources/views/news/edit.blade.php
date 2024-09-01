@@ -1,41 +1,44 @@
-<form action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+@extends('layouts.app')
 
-    <div class="form-group">
-        <label for="title">Judul Berita</label>
-        <input type="text" id="title" name="title" value="{{ $news->title }}" required class="form-control">
-    </div>
+@section('content')
+<div class="container">
+    <h1>Edit Berita</h1>
+    
+    <!-- Menampilkan pesan sukses jika ada -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <div class="form-group">
-        <label for="content">Konten</label>
-        <textarea id="content" name="content" required class="form-control">{{ $news->content }}</textarea>
-    </div>
+    <form action="{{ route('news.update', $newsItem->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        
+        <div class="form-group">
+            <label for="title">Judul:</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $newsItem->title) }}" required>
+        </div>
 
-    <div class="form-group">
-        <label for="source">Sumber Berita (Link)</label>
-        <input type="url" id="source" name="source" value="{{ $news->source }}" class="form-control">
-    </div>
+        <div class="form-group">
+            <label for="description">Deskripsi:</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', $newsItem->description) }}</textarea>
+        </div>
 
-    <div class="form-group">
-        <label for="stunting_count">Jumlah Stunting</label>
-        <input type="number" id="stunting_count" name="stunting_count" value="{{ $news->stunting_count }}" class="form-control">
-    </div>
+        <div class="form-group">
+            <label for="source">Sumber (URL):</label>
+            <input type="text" class="form-control" id="source" name="source" value="{{ old('source', $newsItem->source) }}">
+        </div>
 
-    <div class="form-group">
-        <label for="food_recommendation">Rekomendasi Makanan</label>
-        <input type="text" id="food_recommendation" name="food_recommendation" value="{{ $news->food_recommendation }}" class="form-control">
-    </div>
+        <div class="form-group">
+            <label for="image">Gambar:</label>
+            <input type="file" class="form-control" id="image" name="image">
+            @if ($newsItem->image)
+                <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar" style="max-width: 100px; height: auto;">
+            @endif
+        </div>
 
-    <div class="form-group">
-        <label for="food_image">Foto Rekomendasi Makanan</label>
-        <input type="file" id="food_image" name="food_image" class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label for="food_source">Sumber Rekomendasi Makanan (Link)</label>
-        <input type="url" id="food_source" name="food_source" value="{{ $news->food_source }}" class="form-control">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Update Berita</button>
-</form>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+    </form>
+</div>
+@endsection

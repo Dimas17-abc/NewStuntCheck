@@ -23,7 +23,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    text-align: justify;
 }
+
+.p{
+    text-align: justify;
+}
+
 h1 {
     text-align: center;
 }
@@ -47,9 +53,11 @@ h1 {
 
 .profile-settings {
     position: absolute;
-    top: 40px;
-    right: 40px;
+    top: 70px;
+    right: 50px;
     border-radius: 50%;
+    width: 120px; /* Atur ukuran default */
+    height: 190px; /* Atur ukuran default */
 }
 
 .profile-settings img{
@@ -138,6 +146,7 @@ h2 {
     font-size: 1.2rem;
     color: #333;
     font-weight: bold;
+    text-align: justify;
 }
 
 /* .profile-container {
@@ -177,7 +186,17 @@ h2 {
 .news-item p{
     text-align: justify;
 }
-@media (max-width: 600px) {
+
+.food-item p{
+    text-align: justify;
+}
+
+.kalkulator-container {
+    margin-top: 30px; /* Atur jarak sesuai kebutuhan Anda */
+}
+
+
+@media (max-width: 800px) {
     .container {
         padding: 30px;
     }
@@ -189,5 +208,12 @@ h2 {
 
     .card {
         width: 100%;
+    }
+
+    .profile-settings {
+        top: 5px; /* Sesuaikan jarak atas */
+        right: 30px; /* Sesuaikan jarak kanan */
+        width: 80px; /* Ukuran lebih kecil untuk mobile */
+        height: 80px; /* Ukuran lebih kecil untuk mobile */
     }
 }
