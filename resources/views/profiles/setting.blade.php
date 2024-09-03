@@ -16,7 +16,6 @@
                 <img src="{{ asset('images/back.png') }}" alt="Back" style="width: 24px;">
             </a>
             <h2>Profile</h2>
-            <span class="edit-icon">✏️</span>
         </div>
 
         <div class="profile-pic">

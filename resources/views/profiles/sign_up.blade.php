@@ -55,7 +55,7 @@
                 <input type="password" placeholder="Konfirmasi Password" name="password_confirmation" required>
             </div>
             <div class="button-group">
-                <button type="submit" class="sign-up-button">Masuk</button>
+                <button type="submit" class="sign-up-button">Daftar</button>
             </div>
         </form>
     </div>

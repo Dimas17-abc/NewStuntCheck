@@ -54,16 +54,18 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route Berita
-Route::prefix('news')->group(function () {
-    Route::get('/create', [NewsController::class, 'create'])->name('news.create');
-    Route::post('/', [NewsController::class, 'store'])->name('news.store');
-    Route::get('/', [NewsController::class, 'index'])->name('news.index');
-    Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
-    Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+Route::middleware([CheckAdmin::class])->group(function () {
+    Route::prefix('news')->group(function () {
+        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+        Route::post('/', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/', [NewsController::class, 'index'])->name('news.index');
+        Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');   
+        Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
+        Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+    });
 });
-
 // Route Rekomendasi Makanan
+Route::middleware([CheckAdmin::class])->group(function () {
 Route::prefix('food-recommendations')->group(function () {
     Route::get('/create', [FoodRecommendationController::class, 'create'])->name('food-recommendations.create');
     Route::post('/', [FoodRecommendationController::class, 'store'])->name('food-recommendations.store');
@@ -71,6 +73,7 @@ Route::prefix('food-recommendations')->group(function () {
     Route::get('/{id}/edit', [FoodRecommendationController::class, 'edit'])->name('food-recommendations.edit');
     Route::put('/{id}', [FoodRecommendationController::class, 'update'])->name('food-recommendations.update');
     Route::delete('/{id}', [FoodRecommendationController::class, 'destroy'])->name('food-recommendations.destroy');
+});
 });
 
 // Route Stunting

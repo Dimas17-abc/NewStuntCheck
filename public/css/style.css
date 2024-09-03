@@ -9,8 +9,7 @@ body {
     box-sizing: border-box;
     min-height: fit-content;
     height: 100vh;
-    weight: 50px;
-
+    weight: 20px;
 }
 
 .logo {
@@ -20,12 +19,13 @@ body {
 }
 
 .header h1 {
-    color: rgb(12, 255, 12);
+    color: rgb(78, 161, 26);
     font-size: 24px;
 }
 
 .header p {
-    color: black;
+    color: #000;
+    font-weight: bold;
     font-size: 16px;
 }
 
@@ -43,7 +43,8 @@ body {
 
 .get-started-btn {
     background-color: #00D100;
-    color: white;
+    color: #000;
+    font-weight: 300%;
     padding: 10px 20px;
     border-radius: 25px;
     text-decoration: none;
