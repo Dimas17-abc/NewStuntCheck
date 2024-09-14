@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    background-color: #a5d6a7;
+    background-color: #8ecae6;
     width: 300px;
     margin: auto;
     border-radius: 10px;
@@ -54,7 +54,7 @@ body {
 }
 
 .sign-up-button {
-    background-color: #4caf50;
+    background-color: #023047;
     color: white;
     border: none;
     height: 40px;

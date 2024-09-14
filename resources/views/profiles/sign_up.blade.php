@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <style>
+        .alert {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .alert-success {
+            background-color: #4CAF50;
+        }
+        
+        .alert-danger {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,7 +34,18 @@
                 <button type="submit" class="toggle-link">Masuk</button>
             </form>
         </div>
-        <form action="{{route('register')}}" method="POST">
+        
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <form action="{{ route('register') }}" method="POST">
             @csrf
             <div class="input-group">
                 <span class="icon">
@@ -25,7 +54,7 @@
                             d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm0 48c-88.4 0-160 71.6-160 160v32h320v-32c0-88.4-71.6-160-160-160z" />
                     </svg>
                 </span>
-                <input type="text" placeholder="Nama" name="name" required>
+                <input type="text" placeholder="Nama" name="name" pattern="[A-Za-z\s]+" title="Nama hanya boleh berisi huruf dan tidak boleh hanya spasi" required>
             </div>
             <div class="input-group">
                 <span class="icon">

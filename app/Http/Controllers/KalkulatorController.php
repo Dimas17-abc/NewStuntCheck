@@ -17,7 +17,7 @@ class KalkulatorController extends Controller
         $weight = $request->input('weight');
         $gender = $request->input('gender');
         // $economicStatus = $request->input('economicStatus');
-        $user = auth()->user();
+        $user =Auth::user();
 
         // Klasifikasi umur
         if ($age < 12) {
@@ -58,8 +58,7 @@ class KalkulatorController extends Controller
             'age' => $age,
             'height' => $height,
             'weight' => $weight,
-            'gender' => $gender,
-            //  
+            'gender' => $gender, 
             'category' => $category,
             'user_id' => $user->id,  // Simpan user_id ke database
         ]);

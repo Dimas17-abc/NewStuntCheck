@@ -16,7 +16,7 @@
             </form>
             <button class="active">Masuk</button>
         </div>
-        <form action="/login/credentials" method="POST">
+        <form action="{{ route('login.credentials') }}" method="POST">
             @csrf
             <div class="input-group">
                 <span class="icon">

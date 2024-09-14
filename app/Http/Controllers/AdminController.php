@@ -7,31 +7,28 @@ use App\Models\News;
 use App\Models\User;
 use App\Models\FoodRecommendation;
 use Illuminate\Support\Facades\Auth;
-use PDF; // Pastikan ini adalah namespace yang benar untuk PDF
+use PDF;
 
 class AdminController extends Controller
 {
     public function __construct()
     {
-        // Memastikan hanya admin yang bisa mengakses controller ini
+        // Middleware auth untuk memastikan user sudah login
         $this->middleware('auth');
-        $this->middleware('CheckAdmin'); // Middleware untuk akses admin
+        // Middleware CheckAdmin untuk memeriksa apakah user adalah admin
+        $this->middleware(\App\Http\Middleware\CheckAdmin::class);
     }
 
     // Menampilkan halaman dashboard admin
     public function index()
     {
-        // Mengambil semua berita terbaru
-        $news = News::all();
+        // Mengambil total berita, rekomendasi makanan, dan pengguna
+        $totalBerita = News::count();
+        $totalRekomendasi = FoodRecommendation::count();
+        $totalUser = User::count();
 
-        // Mengambil semua rekomendasi makanan
-        $foodRecommendations = FoodRecommendation::all();
-
-        // Mengirim semua data ke view 'menus.home'
-        return view('menus.home', [
-            'news' => $news,
-            'foodRecommendations' => $foodRecommendations
-        ]);
+        // Mengirim data ke view admin.index
+        return view('admin.index', compact('totalBerita', 'totalRekomendasi', 'totalUser'));
     }
 
     // Menyimpan berita baru
@@ -56,7 +53,7 @@ class AdminController extends Controller
 
         $news->save();
 
-        return redirect()->route('menus.home')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
     // Menyimpan rekomendasi makanan baru
@@ -65,7 +62,6 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'title' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
@@ -80,14 +76,14 @@ class AdminController extends Controller
 
         $foodRecommendation->save();
 
-        return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
+        return redirect()->route('admin.index')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
     }
 
     // Download data user dalam bentuk PDF
     public function downloadUsersPDF()
     {
         $users = User::all();
-        $pdf = PDF::loadView('pdf.users', compact('users'));
+        $pdf = 'PDF'::loadView('pdf.users', compact('users'));
 
         return $pdf->download('users.pdf');
     }

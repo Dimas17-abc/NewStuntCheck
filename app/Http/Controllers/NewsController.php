@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\FoodRecommendation;
+
 
 class NewsController extends Controller
 {
@@ -36,14 +38,31 @@ class NewsController extends Controller
        $news->save();
 
         // Redirect setelah menyimpan
-        return redirect()->route('menus.home')->with('success', 'Berita berhasil ditambahkan.');
+        return redirect()->route('admin.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    public function index()
-    {
-        $news = News::all();
-        return view('menus.home', compact('news'));
-    }
+//     public function index()
+// {
+//     $news = News::all(); // Ambil semua berita
+//     $foodRecommendations = FoodRecommendation::all(); // Ambil semua rekomendasi makanan
+//     return view('menus.home', compact('news', 'foodRecommendations')); // Kirim variabel ke view
+// }
+
+public function index()
+{
+    // Mengambil semua berita dari database
+    $news = News::all();
+
+    // Mengirim data berita ke view
+    return view('news.index', compact('news'));
+}
+
+public function adminIndex()
+{
+    $news = News::all(); // Ambil semua berita
+    $foodRecommendations = FoodRecommendation::all(); // Ambil semua rekomendasi makanan
+    return view('admin.index', compact('news', 'foodRecommendations')); // Kirim variabel ke view
+}
 
     public function edit($id)
     {
@@ -74,15 +93,15 @@ class NewsController extends Controller
         $newsItem->save(); // Simpan perubahan
 
         // Redirect setelah menyimpan perubahan
-        return redirect()->route('menus.home')->with('success', 'Berita berhasil diperbarui.');
+        return redirect()->route('admin.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
     public function destroy($id)
-    {
+    {   
         $newsItem = News::findOrFail($id); // Mengambil berita berdasarkan ID
         $newsItem->delete(); // Hapus berita
 
         // Redirect setelah menghapus
-        return redirect()->route('menus.home')->with('success', 'Berita berhasil dihapus.');
+        return redirect()->route('admin.index')->with('success', 'Berita berhasil dihapus.');
     }
 }

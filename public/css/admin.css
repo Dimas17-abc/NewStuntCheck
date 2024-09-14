@@ -1,0 +1,172 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set base font and background */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2e8b57;
+    color: white;
+}
+
+.navbar .brand {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.navbar .dropdown {
+    position: relative;
+}
+
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* Main container */
+.main-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+td.description {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100px;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar a {
+        margin: 5px 0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+    }
+}

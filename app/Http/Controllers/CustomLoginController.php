@@ -3,33 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
-
+use Illuminate\Support\Facades\Auth;
 
 class CustomLoginController extends Controller
 {
-
+    // Validasi input email dan password
     public function credentials(Request $request)
     {
-        $token = $request->validate([
-            'email' => 'required',
+        return $request->validate([
+            'email' => 'required|email',
             'password' => 'required'
         ]);
-        if (Auth::attempt($token)) {
-            return redirect()->route('menus.home');
-        } else {
-            return redirect()->back();
-        }
-
-        // $email = $request->email;
-        // $password = $request->password;
-
-        // if ($email == 'admin@admin.com' && $password == 'admin123') {
-        //     return redirect('/menus/home');
-        // } else {
-        //     return redirect()->back();
-        // }
-
     }
 
+    // Fungsi login
+    public function login(Request $request)
+    {
+        // Ambil kredensial yang divalidasi
+        $credentials = $this->credentials($request);
+
+        // Coba login dengan kredensial yang diberikan
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // Periksa tipe user dan arahkan ke route yang sesuai
+            if ($user->type === 1) { // 1 untuk admin
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('menus.home');
+            }
+        } else {
+            // Jika login gagal, kembali ke halaman sebelumnya dengan pesan error
+            return redirect()->back()->with('error', 'Login failed');
+        }
+    }
 }

@@ -19,7 +19,7 @@ body {
 }
 
 .header h1 {
-    color: rgb(78, 161, 26);
+    color: #000;
     font-size: 24px;
 }
 
@@ -35,14 +35,14 @@ body {
     max-width: 2048px;
     margin: 0 auto;
     padding: 100px;
-    background-color: #A4FFA4;
+    background-color: #8ecae6;
     border-radius: 10px;
     align-items: center;
     text-align: center;
 }
 
 .get-started-btn {
-    background-color: #00D100;
+    background-color: #00b4d8;
     color: #000;
     font-weight: 300%;
     padding: 10px 20px;

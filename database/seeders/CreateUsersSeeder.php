@@ -21,6 +21,7 @@ class CreateUsersSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'type' => 1,
+                'role' => 'admin',
                 'password' => Hash::make('admin123'),
                 'created_at' => now(),
                 'updated_at' => now(),

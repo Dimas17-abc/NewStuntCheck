@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Pertumbuhan</title>
-    <link rel="stylesheet" href="{{ asset('css/kalku.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/kalku.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
             <button type="submit" class="btn btn-success">Hitung Pertumbuhan</button>
         </form>
 
-        <div class="result">
+        <div class="result mt-4">
             @if(isset($name))
             <h3>Hasil Perhitungan</h3>
             <p>Nama: {{ $name }}</p>
@@ -54,24 +54,30 @@
         </div>
 
         @if(isset($users) && count($users) > 0)
-        <table class="table table-bordered" id="canvas">
-            <tr>
-                <th>Nama</th>
-                <th>Umur</th>
-                <th>Tinggi</th>
-                <th>Berat</th>
-                <th>Kategori</th>
-            </tr>
-            @foreach($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->age }}</td>
-                <td>{{ $user->height }}</td>
-                <td>{{ $user->weight }}</td>
-                <td>{{ $user->category }}</td>
-            </tr>
-            @endforeach
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped mt-4">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th>Nama</th>
+                        <th>Umur</th>
+                        <th>Tinggi</th>
+                        <th>Berat</th>
+                        <th>Kategori</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                    <tr class="text-center">
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->age }}</td>
+                        <td>{{ $user->height }}</td>
+                        <td>{{ $user->weight }}</td>
+                        <td>{{ $user->category }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         <form action="{{ route('kalkulator.export-pdf') }}" method="GET" style="margin-top: 20px;">
             <button type="submit" class="btn btn-primary" target="_blank">Download PDF</button>
