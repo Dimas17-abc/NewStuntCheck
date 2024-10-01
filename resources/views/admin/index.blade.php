@@ -2,6 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         table {
             width: 100%;
@@ -9,7 +10,6 @@
             margin-top: 20px;
         }
 
-        /* Style untuk garis tepi tabel */
         table,
         th,
         td {
@@ -17,7 +17,6 @@
             padding: 10px;
         }
 
-        /* Style untuk header tabel */
         th {
             padding: 12px;
             background-color: #4CAF50;
@@ -25,20 +24,17 @@
             text-align: left;
         }
 
-        /* Style untuk sel tabel */
         td {
             padding: 10px;
             text-align: left;
             vertical-align: middle;
         }
 
-        /* Style untuk gambar di dalam tabel */
         img {
             display: block;
             margin: auto;
         }
 
-        /* Hover effect untuk baris tabel */
         tr:hover {
             background-color: #f5f5f5;
         }
@@ -71,15 +67,11 @@
             text-overflow: ellipsis;
         }
 
-        /* Tabel Aksi */
         .table-actions {
             display: flex;
             align-items: center;
-            /* Vertikal center */
             justify-content: center;
-            /* Horizontal center */
             gap: 10px;
-            /* Jarak antara tombol-tombol */
         }
 
         .table-actions form {
@@ -92,6 +84,7 @@
             text-align: center;
         }
     </style>
+
     <div class="admin-container">
         <!-- Header Admin -->
         <div class="admin-header">
@@ -112,7 +105,7 @@
         <!-- Dashboard Cards -->
         <div class="admin-dashboard">
             <div class="dashboard-card">
-                <i class="fas fa-newspaper"></i>
+                <i class="fa-regular fa-newspaper"></i>
                 <h3>Total Berita</h3>
                 <p>{{ $news->count() }}</p>
             </div>
@@ -169,18 +162,15 @@
         <!-- Tabel Rekomendasi Makanan -->
         <div class="admin-dashboard">
             <div class="dashboard-card">
-                <i class="fas fa-newspaper"></i>
+                <i class="fa-solid fa-apple-whole"></i>
                 <h3>Total Rekomendasi Makanan</h3>
                 <p>{{ $foodRecommendations->count() }}</p>
             </div>
         </div>
         <div class="admin-tables">
             <h3>Daftar Rekomendasi Makanan</h3>
-            {{-- <form action="{{ route('food-recommendations.create') }}" method="get">
-                <button type="button" class="btn btn-success">Tambah Rekomendasi Makanan</button>
-            </form> --}}
             <a href="{{ route('food-recommendations.create') }}">
-                <button type="button" class="btn btn-success">Tambah Berita</button>
+                <button type="button" class="btn btn-success">Tambah Rekomendasi Makanan</button>
             </a>
             <table>
                 <thead>
@@ -224,6 +214,11 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <!-- Tombol Download PDF -->
+        <div class="admin-tables">
+            <a href="{{ route('admin.downloadUsersPDF') }}" class="btn btn-success">Download Data User</a>
         </div>
     </div>
 @endsection

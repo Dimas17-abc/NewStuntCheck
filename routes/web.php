@@ -99,6 +99,6 @@ Route::middleware('auth')->group(function () {
 
     // Route Admin Dashboard untuk PDF download
     Route::prefix('admin')->group(function () {
-        Route::get('/downloadPDF', [AdminController::class, 'downloadPDF'])->name('admin.downloadPDF');
+        Route::get('admin/download-users-pdf', [AdminController::class, 'downloadUsersPDF'])->name('admin.downloadUsersPDF');
     });
 });

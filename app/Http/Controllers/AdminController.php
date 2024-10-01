@@ -83,7 +83,7 @@ class AdminController extends Controller
     public function downloadUsersPDF()
     {
         $users = User::all();
-        $pdf = 'PDF'::loadView('pdf.users', compact('users'));
+        $pdf = PDF::loadView('pdf.users', compact('users'));
 
         return $pdf->download('users.pdf');
     }

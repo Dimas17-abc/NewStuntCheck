@@ -9,7 +9,7 @@ body {
     box-sizing: border-box;
     min-height: fit-content;
     height: 100vh;
-    weight: 20px;
+    background-color: #e0f7df; /* Hijau muda untuk background */
 }
 
 .logo {
@@ -19,12 +19,12 @@ body {
 }
 
 .header h1 {
-    color: #000;
+    color: #000; /* Teks tetap hitam */
     font-size: 24px;
 }
 
 .header p {
-    color: #000;
+    color: #000; /* Teks tetap hitam */
     font-weight: bold;
     font-size: 16px;
 }
@@ -35,15 +35,15 @@ body {
     max-width: 2048px;
     margin: 0 auto;
     padding: 100px;
-    background-color: #8ecae6;
+    background-color: #4caf50; /* Hijau biasa untuk kontainer */
     border-radius: 10px;
     align-items: center;
     text-align: center;
 }
 
 .get-started-btn {
-    background-color: #00b4d8;
-    color: #000;
+    background-color: #388e3c; /* Hijau biasa untuk tombol */
+    color: black;
     font-weight: 300%;
     padding: 10px 20px;
     border-radius: 25px;
@@ -52,8 +52,6 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
-
-/* public/css/home.css */
 
 .news-item {
     border: 1px solid #ddd;

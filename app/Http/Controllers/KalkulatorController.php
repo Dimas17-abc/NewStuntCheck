@@ -16,7 +16,7 @@ class KalkulatorController extends Controller
         $height = $request->input('height');
         $weight = $request->input('weight');
         $gender = $request->input('gender');
-        // $economicStatus = $request->input('economicStatus');
+        // $economicStatus = $request->input('economicStatus'); 
         $user =Auth::user();
 
         // Klasifikasi umur

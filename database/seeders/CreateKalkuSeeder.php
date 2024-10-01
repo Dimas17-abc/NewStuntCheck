@@ -20,19 +20,19 @@ class CreateKalkuSeeder extends Seeder
         // Pastikan user ditemukan sebelum memasukkan data
         if ($admin) {
             // Data kalku yang akan dimasukkan
-            $data = [
-                [
-                    'name' => 'John Doe',
-                    'age' => 30,
-                    'gender' => 'male',
-                    'height' => 175,
-                    'weight' => 70,
-                    'category' => 1, // Sesuaikan dengan logika kategori
-                    'user_id' => $admin->id, // ID dari Admin
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-            ];
+            // $data = [
+            //     [
+            //         'name' => 'John Doe',
+            //         'age' => 30,
+            //         'gender' => 'male',
+            //         'height' => 175,
+            //         'weight' => 70,
+            //         'category' => 1, // Sesuaikan dengan logika kategori
+            //         'user_id' => $admin->id, // ID dari Admin
+            //         'created_at' => now(),
+            //         'updated_at' => now(),
+            //     ],
+            // ];
 
             // Insert data ke tabel kalku
             DB::table('kalkus')->insert($data);

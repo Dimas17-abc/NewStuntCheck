@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f7;
+    background-color: #e0f2e9; /* Hijau lembut untuk background */
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,13 +10,14 @@ body {
 }
 
 .container {
-    background-color: #8ecae6;
+    background-color: #4caf50; /* Hijau biasa untuk kontainer */
     width: 300px;
     margin: auto;
     border-radius: 10px;
-    padding:50px;
+    padding: 50px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
+    color: #000; /* Teks tetap hitam */
 }
 
 .toggle-buttons {
@@ -31,6 +32,7 @@ body {
     border: none;
     font-weight: bold;
     cursor: pointer;
+    color: #000; /* Teks tombol tetap hitam */
 }
 
 .input-group {
@@ -51,14 +53,21 @@ body {
     height: 40px;
     border-radius: 5px;
     border: none;
+    background-color: #e0f7df; /* Hijau muda untuk input */
+    color: #000; /* Teks input tetap hitam */
 }
 
 .sign-up-button {
-    background-color: #023047;
-    color: white;
+    background-color: #05aa0d; /* Hijau biasa untuk tombol */
+    color: black;
+    font-weight: bold;
     border: none;
     height: 40px;
     border-radius: 5px;
     width: 100%;
     cursor: pointer;
+}
+
+.sign-up-button:hover {
+    background-color: #2e7d32; /* Hijau lebih gelap saat di-hover */
 }
