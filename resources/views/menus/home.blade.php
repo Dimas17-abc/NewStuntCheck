@@ -30,26 +30,26 @@
         </div>
 
         <!-- Berita Stunting -->
-        <div class="content-box">
+        <section class="content-box">
             <h3>Berita Tentang Stunting di Indonesia</h3>
             <h1>Berita Terbaru</h1>
             <div class="news-container">
                 @foreach ($news as $newsItem)
-                    <div class="news-item">
+                    <article class="news-item">
                         <h2>{{ $newsItem->title }}</h2>
                         <p>{{ $newsItem->description }}</p>
                         @if ($newsItem->source)
                             <p><strong>Sumber:</strong> <a href="{{ $newsItem->source }}" target="_blank">{{ $newsItem->source }}</a></p>
                         @endif
                         @if ($newsItem->image)
-                            <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita" class="news-image">
+                            <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita: {{ $newsItem->title }}" class="news-image" style="width: 50%">
                         @else
                             <p>Tidak ada gambar</p>
                         @endif
-                    </div>
+                    </article>
                 @endforeach
             </div>
-        </div>
+        </section>
 
         <!-- Rekomendasi Makanan -->
         <div class="content-box">
@@ -63,7 +63,7 @@
                             <p><strong>Sumber:</strong> <a href="{{ $foodRecommendation->source }}" target="_blank">{{ $foodRecommendation->source }}</a></p>
                         @endif
                         @if ($foodRecommendation->image)
-                            <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan" class="food-image">
+                            <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan" class="food-image" style="width: 50%">
                         @else
                             <p>Tidak ada gambar</p>
                         @endif

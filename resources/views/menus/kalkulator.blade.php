@@ -26,7 +26,7 @@
             </div>
             <div class="input-group">
                 <label for="height">Tinggi</label>
-                <input type="number" id="height" name="height" placeholder="Masukkan tinggi (cm)" required>
+                <input type="number" id="height" name="height" placeholder="Masukkan tinggi (cm)" required step="1">
             </div>
             <div class="input-group">
                 <label for="weight">Berat</label>
@@ -50,6 +50,7 @@
             <p>Tinggi: {{ $height }} cm</p>
             <p>Berat: {{ $weight }} kg</p>
             <p>Kategori: {{ $category }}</p>
+            <p style="color: red; font-weight: bold;">Catatan: Hasil ini hanya merupakan estimasi dan belum tentu 100% akurat. Konsultasikan dengan ahli kesehatan untuk informasi yang lebih valid.</p>
             @endif
         </div>
 

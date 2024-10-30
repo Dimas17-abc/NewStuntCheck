@@ -6,20 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container">
-        @if(session('success'))
-            <div class="alert success-alert">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if($errors->any())
-            <div class="alert error-alert">
-                {{ $errors->first() }}
-            </div>
+        <!-- Flash Message Alert -->
+        @if(session('status') == 'success')
+            <script>
+                Swal.fire({
+                    title: "{{ session('message') }}",
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @elseif(session('status') == 'error')
+            <script>
+                Swal.fire({
+                    title: "{{ session('message') }}",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            </script>
         @endif
 
         <div class="toggle-buttons">
@@ -28,6 +36,8 @@
             </form>
             <button class="active">Masuk</button>
         </div>
+        
+        <!-- Form Login -->
         <form action="{{ route('login.credentials') }}" method="POST">
             @csrf
             <div class="input-group">
@@ -54,13 +64,15 @@
                 <button type="submit" class="sign-up-button">Masuk</button>
             </div>
         </form>
+        
+        <!-- Sign Up Prompt -->
         <div class="sign-up-prompt">
             <p>Belum punya akun? <a href="{{ route('profiles.sign_up') }}">Daftar</a></p>
         </div>
     </div>
 
     <script>
-        // Optional: Menghilangkan alert setelah beberapa detik
+        // Optional: Menghilangkan alert biasa setelah beberapa detik
         setTimeout(() => {
             const alert = document.querySelector('.alert');
             if (alert) {

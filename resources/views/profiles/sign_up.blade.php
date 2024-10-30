@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN -->
     <style>
         .alert {
             margin-top: 15px;
@@ -36,13 +37,23 @@
         </div>
         
         @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pendaftaran Berhasil!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                })
+            </script>
         @elseif(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
+                })
+            </script>
         @endif
 
         <form action="{{ route('register') }}" method="POST">

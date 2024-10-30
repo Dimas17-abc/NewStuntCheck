@@ -27,7 +27,8 @@ class CustomLoginController extends Controller
             $user = Auth::user();
 
             // Simpan pesan sukses login ke session
-            session()->flash('success', 'Login berhasil!');
+            session()->flash('status', 'success');
+            session()->flash('message', 'Login berhasil!');
 
             // Periksa tipe user dan arahkan ke route yang sesuai
             if ($user->type === 1) { // 1 untuk admin
@@ -37,7 +38,9 @@ class CustomLoginController extends Controller
             }
         } else {
             // Jika login gagal, kembali ke halaman sebelumnya dengan pesan error
-            return redirect()->back()->withErrors('Login gagal, email atau password salah.');
+            session()->flash('status', 'error');
+            session()->flash('message', 'Login gagal, email atau password salah.');
+            return redirect()->back();
         }
     }
 }

@@ -4,15 +4,14 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Styling untuk tabel dan elemen lainnya */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
 
-        table,
-        th,
-        td {
+        table, th, td {
             border: 1px solid #ddd;
             padding: 10px;
         }
@@ -92,8 +91,7 @@
                 <img src="{{ asset('images/human.png') }}" alt="Admin Avatar">
                 <h4>{{ Auth::user()->name }}</h4>
             </div>
-            <a href="{{ route('logout') }}" class="logout-btn"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="{{ route('logout') }}" class="logout-btn" onclick="event.preventDefault(); showLogoutConfirmation();">
                 Logout
             </a>
 
@@ -134,23 +132,21 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $newsItem->title }}</td>
-                            <td class="description">{{ \Illuminate\Support\Str::limit($newsItem->description, 100, '...') }}
-                            </td>
+                            <td class="description">{{ \Illuminate\Support\Str::limit($newsItem->description, 100, '...') }}</td>
                             <td>{{ $newsItem->source }}</td>
                             <td>
                                 @if ($newsItem->image)
-                                    <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita"
-                                        width="100">
+                                    <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita" width="100">
                                 @else
                                     Tidak ada gambar
                                 @endif
                             </td>
                             <td class="table-actions">
                                 <a href="{{ route('news.edit', $newsItem->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST">
+                                <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                    <button type="button" class="btn btn-danger delete-btn">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -188,26 +184,21 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $foodRecommendation->title }}</td>
-                            <td class="description">
-                                {{ \Illuminate\Support\Str::limit($foodRecommendation->description, 100, '...') }}</td>
-
+                            <td class="description">{{ \Illuminate\Support\Str::limit($foodRecommendation->description, 100, '...') }}</td>
                             <td>{{ $foodRecommendation->source }}</td>
                             <td>
                                 @if ($foodRecommendation->image)
-                                    <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan"
-                                        width="100">
+                                    <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan" width="100">
                                 @else
                                     Tidak ada gambar
                                 @endif
                             </td>
                             <td class="table-actions">
-                                <a href="{{ route('food-recommendations.edit', $foodRecommendation->id) }}"
-                                    class="btn btn-primary">Edit</a>
-                                <form action="{{ route('food-recommendations.destroy', $foodRecommendation->id) }}"
-                                    method="POST">
+                                <a href="{{ route('food-recommendations.edit', $foodRecommendation->id) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('food-recommendations.destroy', $foodRecommendation->id) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                    <button type="button" class="btn btn-danger delete-btn">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -221,4 +212,67 @@
             <a href="{{ route('admin.downloadUsersPDF') }}" class="btn btn-success">Download Data User</a>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const form = this.closest('form');
+
+                swalWithBootstrapButtons.fire({
+                    title: "Apakah kamu yakin?",
+                    text: "Kamu tidak bisa mengembalikan nya!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Ya, Hapus",
+                    cancelButtonText: "Tidak!",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Dibatalkan",
+                            text: "Tidak dihapus",
+                            icon: "error"
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function showLogoutConfirmation() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: "Apakah kamu yakin ingin keluar?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Keluar",
+                cancelButtonText: "Tidak",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        }
+    </script>
 @endsection

@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('type')->default(0)->after('password'); // Users: 0=>User, 1=>Admin, 2=>Manager
-            $table->string('role')->default('user')->after('type'); // Default role is 'user'
+            // Cek apakah kolom 'type' sudah ada
+            if (!Schema::hasColumn('users', 'type')) {
+                $table->tinyInteger('type')->default(0)->after('password'); // Users: 0=>User, 1=>Admin, 2=>Manager
+            }
+            
+            // Cek apakah kolom 'role' sudah ada
+            if (!Schema::hasColumn('users', 'role')) {
+                $table->string('role')->default('user')->after('type'); // Default role is 'user'
+            }
         });
     }
 
@@ -23,8 +30,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('type'); // Remove the 'type' column
-            $table->dropColumn('role'); // Remove the 'role' column
+            // Hapus kolom 'type' jika ada
+            if (Schema::hasColumn('users', 'type')) {
+                $table->dropColumn('type');
+            }
+            
+            // Hapus kolom 'role' jika ada
+            if (Schema::hasColumn('users', 'role')) {
+                $table->dropColumn('role');
+            }
         });
     }
 };

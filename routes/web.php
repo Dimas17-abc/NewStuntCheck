@@ -56,12 +56,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/menus/kalkulator/hitung', [KalkulatorController::class, 'calculate'])->name('kalkulator.hitung');
     Route::get('/kalkulator/export-pdf', [KalkulatorController::class, 'exportPDF'])->name('kalkulator.export-pdf');
 
-    // Route Profil
+    // Profil Pengguna
     Route::get('/profiles/setting', [ProfileController::class, 'showProfile'])->name('profiles.setting');
     Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.update.photo');
     Route::put('/profile/update-name', [ProfileController::class, 'updateName'])->name('profile.update.name');
     Route::put('/profile/update-email', [ProfileController::class, 'updateEmail'])->name('profile.update.email');
     Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
+
 
 
     // Route Berita
@@ -86,7 +87,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-    // Route Rekomendasi Makanan
+    // Rekomendasi Makanan
     Route::prefix('food-recommendations')->group(function () {
         Route::get('/create', [FoodRecommendationController::class, 'create'])->name('food-recommendations.create');
         Route::post('/', [FoodRecommendationController::class, 'store'])->name('food-recommendations.store');
@@ -94,7 +95,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', [FoodRecommendationController::class, 'edit'])->name('food-recommendations.edit');
         Route::put('/{id}', [FoodRecommendationController::class, 'update'])->name('food-recommendations.update');
         Route::delete('/{id}', [FoodRecommendationController::class, 'destroy'])->name('food-recommendations.destroy');
-        // Route::resource('food-recommendations', FoodRecommendationController::class);
     });
 
     // Route Admin Dashboard untuk PDF download

@@ -21,24 +21,25 @@ class FoodRecommendationController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'source' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
+        // Membuat instance baru dari FoodRecommendation
         $foodRecommendation = new FoodRecommendation();
         $foodRecommendation->title = $request->input('title');
         $foodRecommendation->description = $request->input('description');
-        $foodRecommendation->source = $request->input('source');    
-    
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('food_images', 'public');
-            $foodRecommendation->image = $imagePath;
-        }
-    
-        $foodRecommendation->save();
-    
+        $foodRecommendation->source = $request->input('source');
 
-        // Redirect setelah menyimpan
-        return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
+        // Memeriksa apakah ada gambar yang di-upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('food_images', 'public'); // Menyimpan gambar ke storage
+            $foodRecommendation->image = $imagePath; // Simpan path ke database
+        }
+
+        $foodRecommendation->save(); // Simpan ke database
+
+        // Redirect setelah menyimpan ke halaman admin.index
+        return redirect()->route('admin.index')->with('success', 'Rekomendasi makanan berhasil ditambahkan.');
     }
 
     // Menampilkan semua rekomendasi makanan
@@ -48,39 +49,57 @@ class FoodRecommendationController extends Controller
         return view('menus.home', compact('foodRecommendations'));
     }
 
+    // Menampilkan halaman untuk mengedit rekomendasi makanan
     public function edit($id)
     {
         $foodRecommendation = FoodRecommendation::findOrFail($id);
         return view('food-recommendations.edit', compact('foodRecommendation'));
     }
-    
+
+    // Memperbarui rekomendasi makanan
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'source' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
         $foodRecommendation = FoodRecommendation::findOrFail($id);
         $foodRecommendation->title = $request->input('title');
         $foodRecommendation->description = $request->input('description');
+        $foodRecommendation->source = $request->input('source');
 
+        // Memeriksa apakah ada gambar baru yang di-upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('food_images', 'public');
-            $foodRecommendation->image = $imagePath;
+            // Hapus gambar lama jika ada
+            if ($foodRecommendation->image) {
+                \Storage::disk('public')->delete($foodRecommendation->image); // Hapus gambar lama dari storage
+            }
+            $imagePath = $request->file('image')->store('food_images', 'public'); // Menyimpan gambar baru
+            $foodRecommendation->image = $imagePath; // Simpan path baru ke database
         }
 
-        $foodRecommendation->save();
+        $foodRecommendation->save(); // Simpan ke database
 
-        return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil diperbarui.');
+        // Redirect setelah diperbarui ke halaman admin.index
+        return redirect()->route('admin.index')->with('success', 'Rekomendasi makanan berhasil diperbarui.');
     }
 
+    // Menghapus rekomendasi makanan
     public function destroy($id)
     {
         $foodRecommendation = FoodRecommendation::findOrFail($id);
-        $foodRecommendation->delete();
+        
+        // Hapus gambar dari storage jika ada
+        if ($foodRecommendation->image) {
+            \storage::disk('public')->delete($foodRecommendation->image); // Menghapus gambar dari storage
+        }
+        
+        $foodRecommendation->delete(); // Menghapus dari database
 
-        return redirect()->route('menus.home')->with('success', 'Rekomendasi makanan berhasil dihapus.');
+        // Redirect setelah dihapus ke halaman admin.index
+        return redirect()->route('admin.index')->with('success', 'Rekomendasi makanan berhasil dihapus.');
     }
 }
