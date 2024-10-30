@@ -13,7 +13,7 @@ class NewsController extends Controller
     {
         return view('news.create');
     }
---
+
     // Menyimpan berita baru ke dalam database
     public function store(Request $request)
     {
