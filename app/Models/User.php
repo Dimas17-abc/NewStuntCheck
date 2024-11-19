@@ -41,7 +41,16 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password' => 'hashed', 
+    ];
+
+    /**
+     * Default attributes for the model.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'type' => 0, // Default as 'user'
     ];
 
     /**
@@ -52,7 +61,7 @@ class User extends Authenticatable
     protected function role(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => ["user", "admin", "manager"][$value],
+            get: fn ($value, $attributes) => ["user", "admin", "manager"][$attributes['type']],
         );
     }
 
@@ -63,6 +72,6 @@ class User extends Authenticatable
      */
     public function isAdmin(): bool
     {
-        return $this->type === 1; // Assuming '1' represents the admin role
+        return $this->type === 1; 
     }
 }

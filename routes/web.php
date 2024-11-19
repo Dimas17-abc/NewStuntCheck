@@ -8,10 +8,10 @@ use App\Http\Controllers\KalkulatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PDFAdminController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
-use App\Http\Controllers\AdminController;
 
 // Route utama
 Route::get('/', function () {
@@ -33,11 +33,11 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin/download-pdf', [PDFAdminController::class, 'downloadUsersPDF'])->name('admin.downloadPdf');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('menus.home');
+
+// Route::get('/home', [HomeController::class, 'index'])->name('menus.home');
 Route::get('/home', [NewsController::class, 'index'])->name('home');
 
-Route::get('/menus/all', [HomeController::class, 'all
-'])->name('menus.all');
+Route::get('/menus/all', [HomeController::class, 'all'])->name('menus.all');
 
 
 // Route Profil: Sign In dan Sign Up
@@ -67,24 +67,25 @@ Route::middleware('auth')->group(function () {
 
     // Route Berita
     Route::prefix('news')->group(function () {
-    // Menampilkan form untuk membuat berita
-    Route::get('/create', [NewsController::class, 'create'])->name('news.create');
-    
-    // Menyimpan berita baru ke dalam database
-    Route::post('/', [NewsController::class, 'store'])->name('news.store');
-    
-    // Menampilkan daftar semua berita
-    Route::get('/', [NewsController::class, 'index'])->name('news.index'); // Disesuaikan menjadi /news tanpa duplikasi /news/news
-    
-    // Menampilkan form untuk mengedit berita berdasarkan id
-    Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
-    
-    // Memperbarui berita berdasarkan id
-    Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
-    
-    // Menghapus berita berdasarkan id
-    Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
-});
+        // Menampilkan form untuk membuat berita
+        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+
+        // Menyimpan berita baru ke dalam database
+        Route::post('/', [NewsController::class, 'store'])->name('news.store');
+
+        // Menampilkan daftar semua berita
+        Route::get('/', [NewsController::class, 'index'])->name('news.index'); // Disesuaikan menjadi /news tanpa duplikasi /news/news
+
+        // Menampilkan form untuk mengedit berita berdasarkan id
+        Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
+
+        // Memperbarui berita berdasarkan id
+        Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
+
+        // Menghapus berita berdasarkan id
+        Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+    });
+
 
 
     // Rekomendasi Makanan

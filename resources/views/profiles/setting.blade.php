@@ -20,15 +20,15 @@
 
         <div class="profile-pic">
             <!-- Menggunakan Auth::user() untuk mendapatkan foto profil -->
-            <img src="{{ Auth::user()->profile_photo ? asset('storage/profile_photos/' . Auth::user()->profile_photo) : asset('images/human.png') }}" alt="Profile Picture" id="profileImage">
+            <img src="{{ Auth::user()->profile_photo ? Storage::url('profile_photos/' . Auth::user()->profile_photo) : asset('default-profile.png') }}" alt="Profile Picture" class="profile-picture">
             <form action="{{ route('profile.update.photo') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <label for="photo" class="edit-photo-icon">✏️</label>
                 <input type="file" id="photo" name="photo" accept="image/*" style="display: none;" onchange="this.form.submit()">
             </form>
         </div>
-        
-        
+
+
         <div class="input-group">
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" readonly>
@@ -48,7 +48,7 @@
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout-button">LOGOUT</button>
-        </form> 
+        </form>
     </div>
 </body>
 

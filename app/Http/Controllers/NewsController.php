@@ -6,15 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\FoodRecommendation;
 
+
 class NewsController extends Controller
 {
-    // Menampilkan form untuk membuat berita baru
     public function create()
     {
         return view('news.create');
     }
 
-    // Menyimpan berita baru ke dalam database
     public function store(Request $request)
     {
         // Validasi input
@@ -25,31 +24,41 @@ class NewsController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
+        // Buat instance baru untuk model News
         $news = new News();
         $news->title = $request->input('title');
         $news->description = $request->input('description');
         $news->source = $request->input('source');
 
-        // Jika ada file gambar, simpan
+        // Simpan gambar jika ada
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
-            $news->image = $imagePath;
+            $imagePath = $request->file('image')->store('news_images', 'public'); // Disimpan di storage/public/news_images
+            $news->image = $imagePath; // Path gambar disimpan ke database
         }
 
-        $news->save(); // Simpan berita baru
+        $news->save(); // Simpan berita ke database
 
-        // Redirect setelah menyimpan
+        // Redirect kembali ke halaman admin.index dengan pesan sukses
         return redirect()->route('admin.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    // Menampilkan semua berita
+
+    //     public function index()
+    // {
+    //     $news = News::all(); // Ambil semua berita
+    //     $foodRecommendations = FoodRecommendation::all(); // Ambil semua rekomendasi makanan
+    //     return view('menus.home', compact('news', 'foodRecommendations')); // Kirim variabel ke view
+    // }
+
     public function index()
     {
-        $news = News::all(); // Ambil semua berita
-        return view('news.index', compact('news')); // Kirim data ke view
+        // Mengambil semua berita dari database
+        $news = News::all();
+
+        // Mengirim data berita ke view
+        return view('news.index', compact('news'));
     }
 
-    // Menampilkan semua berita dan rekomendasi makanan di halaman admin
     public function adminIndex()
     {
         $news = News::all(); // Ambil semua berita
@@ -57,14 +66,12 @@ class NewsController extends Controller
         return view('admin.index', compact('news', 'foodRecommendations')); // Kirim variabel ke view
     }
 
-    // Menampilkan form untuk mengedit berita berdasarkan ID
     public function edit($id)
     {
         $newsItem = News::findOrFail($id); // Mengambil berita berdasarkan ID
         return view('news.edit', compact('newsItem')); // Menampilkan view edit
     }
 
-    // Memperbarui berita yang sudah ada
     public function update(Request $request, $id)
     {
         // Validasi input
@@ -80,7 +87,6 @@ class NewsController extends Controller
         $newsItem->description = $request->input('description');
         $newsItem->source = $request->input('source');
 
-        // Jika ada file gambar baru, simpan
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('news_images', 'public');
             $newsItem->image = $imagePath;
@@ -92,7 +98,6 @@ class NewsController extends Controller
         return redirect()->route('admin.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
-    // Menghapus berita berdasarkan ID
     public function destroy($id)
     {
         $newsItem = News::findOrFail($id); // Mengambil berita berdasarkan ID

@@ -2,24 +2,23 @@
 
 @section('content')
 <div class="container">
-    <h1>Tambah Berita Baru</h1>
+    <h1>Tambah Rekomendasi</h1>
     
     <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <div class="form-group">
             <label for="title">Judul</label>
             <input type="text" name="title" id="title" class="form-control" required>
         </div>
 
         <div class="form-group">
-            <label for="content">Isi</label>
-            <textarea name="description" id="content" rows="5" class="form-control" required></textarea>
+            <label for="description">Isi</label>
+            <textarea name="description" id="description" rows="5" class="form-control" required></textarea>
         </div>
 
         <div class="form-group">
             <label for="source">Sumber</label>
-            <input type="text" name="source" id="source" class="form-control">
+            <input type="text" name="source" id="source" class="form-control" required>
         </div>
 
         <div class="form-group">
@@ -36,6 +35,9 @@
         max-width: 800px;
         margin: auto;
         padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
@@ -61,6 +63,7 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        box-sizing: border-box;
     }
 
     .form-group textarea {

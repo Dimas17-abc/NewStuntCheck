@@ -11,7 +11,9 @@
             margin-top: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 10px;
         }
@@ -33,6 +35,16 @@
             display: block;
             margin: auto;
         }
+
+        td img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+            margin: auto;
+        }
+
 
         tr:hover {
             background-color: #f5f5f5;
@@ -116,7 +128,7 @@
                 <button type="button" class="btn btn-success">Tambah Berita</button>
             </a>
 
-            <table>
+            <table class="table table-striped table-responsive">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -132,21 +144,25 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $newsItem->title }}</td>
-                            <td class="description">{{ \Illuminate\Support\Str::limit($newsItem->description, 100, '...') }}</td>
-                            <td>{{ $newsItem->source }}</td>
+                            <td class="description">{{ \Illuminate\Support\Str::limit($newsItem->description, 100, '...') }}
+                            </td>
+                            <td>{{ $newsItem->source ?? 'Tidak ada sumber' }}</td>
                             <td>
                                 @if ($newsItem->image)
-                                    <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita" width="100">
+                                    <img src="{{ asset('storage/' . $newsItem->image) }}" alt="Gambar Berita"
+                                        width="100">
                                 @else
                                     Tidak ada gambar
                                 @endif
                             </td>
                             <td class="table-actions">
                                 <a href="{{ route('news.edit', $newsItem->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST" class="delete-form">
+                                <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST"
+                                    class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger delete-btn">Hapus</button>
+                                    <button type="submit" class="btn btn-danger delete-btn"
+                                        onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -154,6 +170,7 @@
                 </tbody>
             </table>
         </div>
+
 
         <!-- Tabel Rekomendasi Makanan -->
         <div class="admin-dashboard">
@@ -184,18 +201,22 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $foodRecommendation->title }}</td>
-                            <td class="description">{{ \Illuminate\Support\Str::limit($foodRecommendation->description, 100, '...') }}</td>
+                            <td class="description">
+                                {{ \Illuminate\Support\Str::limit($foodRecommendation->description, 100, '...') }}</td>
                             <td>{{ $foodRecommendation->source }}</td>
                             <td>
                                 @if ($foodRecommendation->image)
-                                    <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan" width="100">
+                                    <img src="{{ asset('storage/' . $foodRecommendation->image) }}" alt="Gambar Makanan"
+                                        width="100">
                                 @else
                                     Tidak ada gambar
                                 @endif
                             </td>
                             <td class="table-actions">
-                                <a href="{{ route('food-recommendations.edit', $foodRecommendation->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('food-recommendations.destroy', $foodRecommendation->id) }}" method="POST" class="delete-form">
+                                <a href="{{ route('food-recommendations.edit', $foodRecommendation->id) }}"
+                                    class="btn btn-primary">Edit</a>
+                                <form action="{{ route('food-recommendations.destroy', $foodRecommendation->id) }}"
+                                    method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger delete-btn">Hapus</button>

@@ -22,23 +22,22 @@ class ProfileController extends Controller
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
+        $photo = $request->file('photo');
+
         $user = Auth::user();
         if ($user->profile_photo) {
             Storage::delete('public/profile_photos/' . $user->profile_photo);
         }
-    
-        $photoName = time() . '.' . $request->photo->extension();
-        $request->photo->storeAs('public/profile_photos', $photoName);
-    
-        $user->profile_photo = $photoName;
-        $user->save();
-    
-        // Debugging
-        // dd('Photo uploaded successfully', $photoName);
-    
-        return redirect()->route('profiles.setting')->with('success', 'Foto profil berhasil diperbarui.');
-    }
+
+        // Simpan foto baru dengan nama file yang benar
+        $photoName = $user->id . '.' . $photo->getClientOriginalExtension();
+        $path = $photo->storeAs('profile_photos', $photoName, 'public');
+
+        // Update nama file di database
+        $user->update(['profile_photo' => $photoName]);
+        return redirect()->route('profiles.setting')->with('success', 'Foto profil berhasil diperbarui!');
+}
 
     // Mengupdate nama pengguna
     public function updateName(Request $request)

@@ -27,8 +27,12 @@ class AdminController extends Controller
         $totalRekomendasi = FoodRecommendation::count();
         $totalUser = User::count();
 
+        $news = News::all();
+        $foodRecommendations = FoodRecommendation::all();
+
+
         // Mengirim data ke view admin.index
-        return view('admin.index', compact('totalBerita', 'totalRekomendasi', 'totalUser'));
+        return view('admin.index', compact('news', 'foodRecommendations', 'totalBerita', 'totalRekomendasi', 'totalUser'));
     }
 
     // Menyimpan berita baru
@@ -46,6 +50,7 @@ class AdminController extends Controller
         $news->content = $request->content;
         $news->source = $request->source;
 
+        // Jika ada gambar yang diupload
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('news_images', 'public');
             $news->image = basename($path);
@@ -69,6 +74,7 @@ class AdminController extends Controller
         $foodRecommendation->name = $request->name;
         $foodRecommendation->description = $request->description;
 
+        // Jika ada foto yang diupload
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('food_recommendations', 'public');
             $foodRecommendation->photo = basename($path);
