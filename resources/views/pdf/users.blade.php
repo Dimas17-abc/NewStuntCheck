@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Users</title>
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
         th, td {
             border: 1px solid black;
@@ -14,6 +17,8 @@
         }
         img {
             width: 50px;
+            height: 50px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -26,6 +31,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Type</th>
+                <th>Location</th>
                 <th>Profile Photo</th>
             </tr>
         </thead>
@@ -36,6 +42,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->type }}</td>
+                    <td>{{ $user->location ? $user->location->address : 'No location data' }}</td>
                     <td>
                         @if($user->profile_photo)
                             <img src="{{ public_path('storage/profile_photos/' . $user->profile_photo) }}" alt="Profile Photo">

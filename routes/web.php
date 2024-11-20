@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdmin;
+use App\Http\Controllers\trackLocationController;
 
 // Route utama
 Route::get('/', function () {
@@ -29,15 +30,16 @@ Route::post('/register', [CustomRegisterController::class, 'register'])->name('r
 
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/admin', [NewsController::class, 'adminIndex'])->name('admin.index');
     Route::get('/admin/download-pdf', [PDFAdminController::class, 'downloadUsersPDF'])->name('admin.downloadPdf');
 });
 
 
-// Route::get('/home', [HomeController::class, 'index'])->name('menus.home');
-Route::get('/home', [NewsController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('menus.home');
 
 Route::get('/menus/all', [HomeController::class, 'all'])->name('menus.all');
+
+Route::get('/track-location', [trackLocationController::class, 'trackLocation'])->name('track.location');
+
 
 
 // Route Profil: Sign In dan Sign Up
@@ -52,6 +54,7 @@ Route::get('/profiles/sign_up', function () {
 Route::middleware('auth')->group(function () {
     // Route Menu Utama untuk user
     Route::get('/home', [HomeController::class, 'index'])->name('menus.home');
+    Route::get('/menus/home', [HomeController::class, 'index'])->name('menus.home');
     Route::get('/menus/kalkulator', [KalkulatorController::class, 'index'])->name('menus.kalkulator');
     Route::post('/menus/kalkulator/hitung', [KalkulatorController::class, 'calculate'])->name('kalkulator.hitung');
     Route::get('/kalkulator/export-pdf', [KalkulatorController::class, 'exportPDF'])->name('kalkulator.export-pdf');
@@ -65,34 +68,31 @@ Route::middleware('auth')->group(function () {
 
 
 
-    // Route Berita
     Route::prefix('news')->group(function () {
-        // Menampilkan form untuk membuat berita
-        Route::get('/create', [NewsController::class, 'create'])->name('news.create');
+        // Menampilkan daftar berita
+        Route::get('/', [NewsController::class, 'index'])->name('news.index');
 
-        // Menyimpan berita baru ke dalam database
+        // Menampilkan detail berita
+        Route::get('/{id}', [NewsController::class, 'show'])->name('news.show');
+
+        // Menampilkan form untuk membuat berita
+        Route::get('/', [NewsController::class, 'create'])->name('news.create');
         Route::post('/', [NewsController::class, 'store'])->name('news.store');
 
-        // Menampilkan daftar semua berita
-        Route::get('/', [NewsController::class, 'index'])->name('news.index'); // Disesuaikan menjadi /news tanpa duplikasi /news/news
-
-        // Menampilkan form untuk mengedit berita berdasarkan id
+        // Menampilkan form untuk mengedit berita
         Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
-
-        // Memperbarui berita berdasarkan id
         Route::put('/{id}', [NewsController::class, 'update'])->name('news.update');
 
-        // Menghapus berita berdasarkan id
+        // Menghapus berita
         Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
     });
-
-
 
     // Rekomendasi Makanan
     Route::prefix('food-recommendations')->group(function () {
         Route::get('/create', [FoodRecommendationController::class, 'create'])->name('food-recommendations.create');
         Route::post('/', [FoodRecommendationController::class, 'store'])->name('food-recommendations.store');
         Route::get('/', [FoodRecommendationController::class, 'index'])->name('food-recommendations.index');
+        Route::get('/{id}', [FoodRecommendationController::class, 'show'])->name('food-recommendations.show');
         Route::get('/{id}/edit', [FoodRecommendationController::class, 'edit'])->name('food-recommendations.edit');
         Route::put('/{id}', [FoodRecommendationController::class, 'update'])->name('food-recommendations.update');
         Route::delete('/{id}', [FoodRecommendationController::class, 'destroy'])->name('food-recommendations.destroy');

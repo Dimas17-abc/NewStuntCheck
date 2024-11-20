@@ -36,54 +36,66 @@
             <div class="carousel">
                 <button class="carousel-btn prev-btn">❮</button>
                 <div class="news-container">
-                    @foreach ($news as $newsItem)
+                    @forelse ($news as $newsItem)
                         <div class="news-item">
-                            <h2>{{ $newsItem->title }}</h2>
-                            <p>{{ $newsItem->description }}</p>
-                            @if ($newsItem->image)
-                                <div class="image-container">
-                                    <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}">
-                                    <small class="image-source">Sumber:
-                                        {{ $newsItem->source ?? 'Tidak ada sumber' }}</small>
-                                </div>
-                            @endif
+                            <a href="{{ route('news.show', $newsItem->id) }}"
+                                style="text-decoration: none; color: inherit;">
+                                <h2>{{ $newsItem->title }}</h2>
+                                <p>{{ \Illuminate\Support\Str::limit($newsItem->description, 150, '...') }}</p>
+                                @if ($newsItem->image)
+                                    <div class="image-container">
+                                        <img src="{{ asset('storage/' . $newsItem->image) }}"
+                                            alt="{{ $newsItem->title }}">
+                                        <small class="image-source">Sumber:
+                                            {{ $newsItem->source ?? 'Tidak ada sumber' }}</small>
+                                    </div>
+                                @endif
+                            </a>
                         </div>
-                    @endforeach
+                    @empty
+                        <p>Tidak ada berita saat ini.</p>
+                    @endforelse
                 </div>
                 <button class="carousel-btn next-btn">❯</button>
             </div>
         </section>
 
+
         <!-- Rekomendasi Makanan -->
         <div class="content-box">
             <h1 style="text-align: center">Rekomendasi Makanan</h1>
-            <div class="food-container">
-                @foreach ($foodRecommendations as $foodRecommendation)
-                    <div class="food-item">
-                        <h2>{{ $foodRecommendation->title }}</h2>
-                        <p>{{ $foodRecommendation->description }}</p>
-                        @if ($foodRecommendation->image)
-                            <div class="image-container">
-                                <img src="{{ asset('storage/' . $foodRecommendation->image) }}"
-                                    alt="{{ $foodRecommendation->title }}">
-                                <small class="image-source">Sumber:
-                                    {{ $foodRecommendation->source ?? 'Tidak ada sumber' }}</small>
-                            </div>
-                        @else
-                            <p>Tidak ada gambar</p>
-                        @endif
-                    </div>
-                @endforeach
+            <div class="carousel">
+                <button class="carousel-btn prev-btn">❮</button>
+                <div class="food-container">
+                    @foreach ($foodRecommendations as $foodRecommendation)
+                        <div class="food-item">
+                            <a href="{{ route('food-recommendations.show', $foodRecommendation->id) }}"
+                                style="text-decoration: none; color: inherit;">
+                                <h2>{{ $foodRecommendation->title }}</h2>
+                                <p>{{ $foodRecommendation->description }}</p>
+                                @if ($foodRecommendation->image)
+                                    <div class="image-container">
+                                        <img src="{{ asset('storage/' . $foodRecommendation->image) }}"
+                                            alt="{{ $foodRecommendation->title }}">
+                                        <small class="image-source">Sumber:
+                                            {{ $foodRecommendation->source ?? 'Tidak ada sumber' }}</small>
+                                    </div>
+                                @else
+                                    <p>Tidak ada gambar</p>
+                                @endif
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-btn next-btn">❯</button>
             </div>
         </div>
-
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const newsContainer = document.querySelector('.news-container');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
-            const itemWidth = 320; // Lebar setiap berita termasuk margin (sesuaikan dengan CSS)
+            const itemWidth = 320; 
             let currentScroll = 0;
 
             prevBtn.addEventListener('click', () => {
@@ -106,6 +118,15 @@
     </script>
 
     <style>
+        .news-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .news-item a:hover {
+            color: #2e8b57;
+        }
+
         /* Gaya untuk kontainer gambar (berita dan makanan) */
         .image-container {
             text-align: center;
@@ -139,13 +160,74 @@
             color: #555;
         }
 
+        .carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        /* Styling container makanan */
+        .food-container {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.4s ease-in-out;
+        }
+
         /* Tambahan untuk food-item */
         .food-item {
-            margin-bottom: 20px;
-            padding: 10px;
+            flex: 0 0 300px;
+            background: #f9f9f9;
+            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .food-item .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Styling tombol navigasi carousel */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-btn:hover {
+            background-color: #246b44;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .food-item {
+                flex: 0 0 250px;
+            }
         }
 
         .food-item h2 {

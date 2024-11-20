@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->type === 1; 
     }
+
+    // public function location()
+    // {
+    //     return $this->hasOne(Location::class);  
+    // }
 }

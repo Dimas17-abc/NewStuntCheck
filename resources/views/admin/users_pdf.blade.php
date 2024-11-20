@@ -50,18 +50,20 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->type }}</td>
-                    <td>
-                        @if($user->profile_photo)
-                            <img src="{{ public_path('storage/profile_photos/' . $user->profile_photo) }}" width="50px" height="50px">
-                        @else
-                            Tidak ada foto
-                        @endif
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->type }}</td>
+                <td>{{ $user->location ? $user->location->address : 'No location data' }}</td>
+                <td>
+                    @if($user->profile_photo)
+                        <img src="{{ public_path('storage/profile_photos/' . $user->profile_photo) }}" alt="Profile Photo">
+                    @else
+                        Tidak ada foto
+                    @endif
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>

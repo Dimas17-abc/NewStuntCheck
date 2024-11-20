@@ -27,13 +27,13 @@ class FoodRecommendationController extends Controller
         $foodRecommendation = new FoodRecommendation();
         $foodRecommendation->title = $request->input('title');
         $foodRecommendation->description = $request->input('description');
-        $foodRecommendation->source = $request->input('source');    
-    
+        $foodRecommendation->source = $request->input('source');
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('food_images', 'public');
             $foodRecommendation->image = $imagePath;
         }
-    
+
         $foodRecommendation->save();
 
         // Redirect setelah menyimpan ke halaman admin.index
@@ -47,12 +47,22 @@ class FoodRecommendationController extends Controller
         return view('menus.home', compact('foodRecommendations'));
     }
 
+    public function show($id)
+    {
+        // Find the food recommendation by its ID
+        $foodRecommendation = FoodRecommendation::find($id);
+
+        // Pass the foodRecommendation to the view
+        return view('food-recommendations.show', compact('foodRecommendation'));
+    }
+
+
     public function edit($id)
     {
         $foodRecommendation = FoodRecommendation::findOrFail($id);
         return view('food-recommendations.edit', compact('foodRecommendation'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
