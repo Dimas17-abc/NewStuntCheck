@@ -11,13 +11,25 @@ class KalkulatorController extends Controller
 {
     public function calculate(Request $request)
     {
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'address' => 'required|string|max:255',
+        //     'nik' => 'required|string|digits:16',
+        //     'age' => 'required|numeric|min:0|max:150',
+        //     'height' => 'required|numeric|min:0|max:300',
+        //     'weight' => 'required|numeric|min:0|max:500',
+        //     'gender' => 'required|in:male,female',
+        // ]);
+
         $name = $request->input('name');
+        $address = $request->input('address');
+        $nik = $request->input('nik');
         $age = $request->input('age');
         $height = $request->input('height');
         $weight = $request->input('weight');
         $gender = $request->input('gender');
         // $economicStatus = $request->input('economicStatus'); 
-        $user =Auth::user();
+        $user = Auth::user();
 
         // Klasifikasi umur
         if ($age < 12) {
@@ -55,18 +67,31 @@ class KalkulatorController extends Controller
         // Simpan ke dalam database
         $kalku = Kalku::create([
             'name' => $name,
+            'address' => $address,
+            'nik' => $nik,
             'age' => $age,
             'height' => $height,
             'weight' => $weight,
-            'gender' => $gender, 
+            'gender' => $gender,
             'category' => $category,
             'user_id' => $user->id,  // Simpan user_id ke database
         ]);
-
+        
         // Ambil semua data kalkulator milik user saat ini
         $users = Kalku::where('user_id', $user->id)->get();
+        
+        // return view('menus.kalkulator', [
+        //     'name' => $request->name,
+        //     'address' => $request->address,
+        //     'nik' => $request->nik,
+        //     'age' => $request->age,
+        //     'height' => $request->height,
+        //     'weight' => $request->weight,
+        //     'category' => $category,
+        // ]);
 
-        return view('menus.kalkulator', compact('name', 'age', 'height', 'weight', 'category', 'users'));
+
+        return view('menus.kalkulator', compact('name', 'address', 'nik', 'age', 'height', 'weight', 'category', 'users'));
     }
 
     public function exportPDF()

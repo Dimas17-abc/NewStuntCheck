@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('kalkus', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Tambahkan kolom user_id
+            $table->unsignedBigInteger('user_id')->constrained('users')->onDelete('cascade'); // Tambahkan kolom user_id
             $table->string('name');
+            $table->string('address');
+            $table->string('nik', 16);
             $table->integer('age');
             $table->integer('height');
             $table->integer('weight');

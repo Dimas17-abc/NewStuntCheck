@@ -127,7 +127,9 @@
             <a href="{{ route('news.create') }}">
                 <button type="button" class="btn btn-success">Tambah Berita</button>
             </a>
-
+            <a href="{{ route('admin.results') }}">
+                <button type="button" class="btn btn-success"> Berita</button>
+            </a>
             <table class="table table-striped table-responsive">
                 <thead>
                     <tr>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\User;
+use App\Models\Kalku;
 use App\Models\FoodRecommendation;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -104,5 +105,14 @@ class AdminController extends Controller
     public function createFoodRecommendation()
     {
         return view('food_recommendations.create');
+    }
+
+    public function showResults()
+    {
+        // Ambil semua data hasil perhitungan user
+        $results = Kalku::all();
+
+        // Kirim data ke view
+        return view('admin.results', compact('results'));
     }
 }

@@ -22,6 +22,8 @@ class CreateKalkuSeeder extends Seeder
             $data = [
                 [
                     'name' => 'John Doe',
+                    'address' => 'Bandung',
+                    'nik' => 123,
                     'age' => 30,
                     'gender' => 'male',
                     'height' => 175,

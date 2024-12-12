@@ -21,6 +21,14 @@
                 <input type="text" id="name" name="name" placeholder="Masukkan nama" required>
             </div>
             <div class="input-group">
+                <label for="address">Alamat</label>
+                <input type="text" id="address" name="address" placeholder="Masukkan alamat" required>
+            </div>
+            <div class="input-group">
+                <label for="nik">NIK</label>
+                <input type="text" id="nik" name="nik" placeholder="Masukkan NIK" required>
+            </div>
+            <div class="input-group">
                 <label for="age">Umur</label>
                 <input type="number" id="age" name="age" placeholder="Masukkan umur (bulan)" min="0" max="59" required>
             </div>
@@ -46,6 +54,8 @@
             @if(isset($name))
             <h3>Hasil Perhitungan</h3>
             <p>Nama: {{ $name }}</p>
+            <p>Alamat: {{ $address }}</p>
+            <p>NIK: {{ $nik }}</p>
             <p>Umur: {{ $age }} bulan</p>
             <p>Tinggi: {{ $height }} cm</p>
             <p>Berat: {{ $weight }} kg</p>
@@ -60,6 +70,8 @@
                 <thead class="thead-dark">
                     <tr class="text-center">
                         <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>NIK</th>
                         <th>Umur</th>
                         <th>Tinggi</th>
                         <th>Berat</th>
@@ -70,6 +82,8 @@
                     @foreach($users as $user)
                     <tr class="text-center">
                         <td>{{ $user->name }}</td>
+                        <td>{{ $user->address }}</td>
+                        <td>{{ $user->nik }}</td>
                         <td>{{ $user->age }}</td>
                         <td>{{ $user->height }}</td>
                         <td>{{ $user->weight }}</td>

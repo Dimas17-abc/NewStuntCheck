@@ -31,6 +31,7 @@ Route::post('/register', [CustomRegisterController::class, 'register'])->name('r
 Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/download-pdf', [PDFAdminController::class, 'downloadUsersPDF'])->name('admin.downloadPdf');
+    Route::get('/admin/results', [AdminController::class, 'showResults'])->name('admin.results');
 });
 
 
